@@ -1,0 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities; 
+
+*{
+    box-sizing: border-box;
+    padding: 0px;
+    margin: 0px;
+}
+
+body{
+    height: 100vh;
+    width: 100vw;
+    /* display: flex;
+    align-items: center;
+    justify-content: center; */
+}
+
+.navbar{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    /* background-color: red; */
+    /* height: 100vh; */
+    /* width: 100vw; */
+    /* padding: 10px; */
+} 
+
+.tabs{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.tabCntent{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.tableSize{
+    width: 90vw;
+    min-width: 50px;
+}

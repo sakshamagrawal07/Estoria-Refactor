@@ -34,7 +34,7 @@ export default function Wings() {
         <Card {...nonCultural[4]} />
     ]
 
-    const allCards = [...culturalCards,...nonCulturalCards]
+    const allCards = [...culturalCards, ...nonCulturalCards]
 
     return (
         <>
@@ -58,7 +58,7 @@ export default function Wings() {
                 {...nonCulturalCards}
             </div>
             {/* <script type="text/javascript" src="./vanilla-tilt.js"></script> */}
-            {/* {VanillaTilt.init(document.querySelectorAll(".card"), {
+            {/* {VanillaTilt.init([...culturalCards, ...nonCulturalCards], {
                 max: 25,
                 speed: 400
             })

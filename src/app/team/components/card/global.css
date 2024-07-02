@@ -85,7 +85,8 @@
 .ourTeam .name {
     color: #1b1d1d;
     text-transform: capitalize;
-
+    font-size: 25px;
+    font-weight: 700;
     .nameSpan{
         color: #1b1d1d;
     }
@@ -94,6 +95,7 @@
 .ourTeam .title {
     display: block;
     font-size: 15px;
+    font-weight: 700;
     color: #4e5052;
     text-transform: capitalize;
 }
