@@ -1,0 +1,51 @@
+body {
+  background: conic-gradient(
+        at 62.5% 12.5%,
+        rgba(35, 38, 43, 0.64) 25%,
+        #0000 0
+      )
+      calc(28px / -8) calc(28px / 2),
+    conic-gradient(at 62.5% 12.5%, rgba(35, 38, 43, 0.64) 25%, #0000 0)
+      calc(-3 * 28px / 8) calc(28px / 4),
+    conic-gradient(at 87.5% 62.5%, rgba(35, 38, 43, 0.64) 25%, #0000 0)
+      calc(3 * 28px / 8) calc(28px / 4),
+    conic-gradient(at 87.5% 62.5%, rgba(35, 38, 43, 0.64) 25%, #0000 0)
+      calc(28px / -8) 0,
+    conic-gradient(at 25% 12.5%, rgba(35, 38, 43, 0.64) 25%, #0000 0) 0
+      calc(28px / -4),
+    conic-gradient(at 25% 12.5%, rgba(35, 38, 43, 0.64) 25%, #0000 0)
+      calc(28px / -4) 0,
+    conic-gradient(at 87.5% 87.5%, rgba(35, 38, 43, 0.64) 25%, #0000 0)
+      calc(28px / 8) 0 #1b1d1d;
+    background-size: 28px 28px;
+}
+
+@font-face {
+  font-family: "Samkaran";
+  src: url("../../../../public/samkaran.TTF") format("truetype");
+}
+.samkaran {
+  font-family: "Samkaran";
+  color: #fff;
+}
+.header {
+  @apply flex justify-center items-center h-full mb-3;
+  font-size: 3rem;
+}
+*:focus {
+  outline: none;
+}
+#simple-search {
+  border-top-left-radius: 0.375rem;
+  border-bottom-left-radius: 0.375rem;
+}
+#simple-search:hover {
+  background-color: #212529
+}
+.button {
+  border-top-right-radius: 0.375rem;
+  border-bottom-right-radius: 0.375rem;
+}
+.button:hover {
+  background-color: #212529
+}

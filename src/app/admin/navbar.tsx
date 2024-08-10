@@ -1,6 +1,7 @@
 "use client"
 import React from "react";
-import { Navbar, NavbarContent, NavbarMenuToggle, NavbarMenu, NavbarMenuItem, Link} from "@nextui-org/react";
+import { Navbar, NavbarContent, NavbarMenuToggle, NavbarMenu, NavbarMenuItem, Link, Button } from "@nextui-org/react";
+import { signOut } from "next-auth/react";
 
 export default function NavBar() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
@@ -9,7 +10,7 @@ export default function NavBar() {
     "Home",
     "Teams",
     "Wings",
-    "Timeline",
+    "Events",
     "Gallery",
   ];
 
@@ -27,13 +28,22 @@ export default function NavBar() {
             <Link
               color="foreground"
               className="w-full"
-              href={`/admin/${item.toLowerCase()}`}
+              href={`/admin/auth/${item.toLowerCase()}`}
               size="lg"
             >
               {item}
             </Link>
           </NavbarMenuItem>
         ))}
+        <NavbarMenuItem key="button">
+          <Button
+            onClick={()=>signOut()}
+            variant="solid"
+            color="secondary"
+          >
+            Sign-out
+          </Button>
+        </NavbarMenuItem>
       </NavbarMenu>
     </Navbar>
   );

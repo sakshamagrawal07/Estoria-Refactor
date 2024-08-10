@@ -3,14 +3,13 @@ import { NextRequest, NextResponse } from 'next/server'
 export async function POST(req: NextRequest, res: NextResponse) {
     try {
         const request = await req.json();
-        const response: Response = await fetch("http://localhost:3000/admin/api?collection=teams", {
+        const response: Response = await fetch("http://localhost:3000/admin/api?collection=home", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(request),
         })
-
         let returnResponse;
         if (response.status == 200) returnResponse = "success";
         else returnResponse = "Error from server";
@@ -27,7 +26,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
 export async function GET(req: NextRequest, res: NextResponse) {
 
     try {
-        const response: Response = await fetch("http://localhost:3000/admin/api?collection=teams", {
+        const response: Response = await fetch("http://localhost:3000/admin/api?collection=home", {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -44,11 +43,12 @@ export async function GET(req: NextRequest, res: NextResponse) {
     }
 }
 
+
 export async function DELETE(req: NextRequest, res: NextResponse) {
 
     try {
         const id = req.nextUrl.searchParams.get('_id');
-        const response: Response = await fetch(`http://localhost:3000/admin/api?collection=teams&_id=${id}`, {
+        const response: Response = await fetch(`http://localhost:3000/admin/api?collection=home&_id=${id}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',

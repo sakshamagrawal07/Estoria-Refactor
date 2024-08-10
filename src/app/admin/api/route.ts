@@ -1,12 +1,10 @@
 import mongoose from "mongoose";
-import {ObjectId} from "mongodb"
+import { ObjectId } from "mongodb"
 import { NextRequest, NextResponse } from 'next/server'
-import Teams from "./models/teams"
-import type { TeamMember } from './models/teams';
-import Events from "./models/events"
-import type { EventsInterface } from './models/events';
-import Wings from './models/wings';
-import { ClubWings } from "./models/wings";
+import Teams, { TeamMember } from "./models/teams"
+import Events, { EventsInterface } from "./models/events"
+import Wings, { ClubWings } from './models/wings';
+import Home, { HomeInterface } from "./models/home";
 
 
 const Connection = async () => {
@@ -31,6 +29,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
     // console.log(collection)
     let response;
     if (collection === "teams") {
+      // console.log("from api?collection=teams",request)
       const data = {
         "name": request.name,
         "position": request.position,
@@ -66,6 +65,17 @@ export async function POST(req: NextRequest, res: NextResponse) {
       await addWing(data)
         .then((msg) => response = msg)
         .catch((err) => response = err)
+    } else if (collection === "home") {
+      const data = {
+        "title": request?.title,
+        "cardType": request?.cardType,
+        "description": request.description,
+        "image": request?.image,
+        "imageUrls": request?.imageUrls
+      }
+      await addHomeData(data)
+        .then((msg) => response = msg)
+        .catch((err) => response = err)
     }
     return NextResponse.json({
       message: response
@@ -94,6 +104,9 @@ export async function GET(req: NextRequest, res: NextResponse) {
       response = data
     } else if (collection === "wings") {
       const data = await Wings.find({})
+      response = data
+    } else if (collection === "home") {
+      const data = await Home.find({})
       response = data
     }
     return NextResponse.json({
@@ -126,6 +139,10 @@ export async function DELETE(req: NextRequest, res: NextResponse) {
       await deleteWing(id.toString())
         .then((msg) => response = msg)
         .catch((err) => response = err)
+    } else if (collection === "home") {
+      await deleteHomeData(id.toString())
+        .then((msg) => response = msg)
+        .catch((err) => response = err)
     }
     return NextResponse.json({
       message: response
@@ -140,6 +157,18 @@ export async function DELETE(req: NextRequest, res: NextResponse) {
   }
 }
 
+async function addHomeData(data: HomeInterface): Promise<string> {
+  // console.log(data)
+  return new Promise((resolve, reject) => {
+    try {
+      const res = Home.create(data)
+      resolve("success")
+
+    } catch (error) {
+      reject("Error adding data");
+    }
+  })
+}
 
 async function addTeams(data: TeamMember): Promise<string> {
   return new Promise((resolve, reject) => {
@@ -154,7 +183,7 @@ async function addTeams(data: TeamMember): Promise<string> {
 }
 
 async function addTimelineEvents(data: EventsInterface): Promise<string> {
-  console.log(data)
+  // console.log(data)
   return new Promise((resolve, reject) => {
     try {
       const res = Events.create(data)
@@ -178,9 +207,26 @@ async function addWing(data: ClubWings): Promise<string> {
   })
 }
 
+async function deleteHomeData(_id: string): Promise<string> {
+
+  return new Promise(async (resolve, reject) => {
+    try {
+      const res = await Home.deleteOne({
+        "_id": new ObjectId(_id)
+      });
+      resolve("deleted")
+
+    } catch (error) {
+      // console.log("ID = ",_id)
+      // console.log(error)
+      reject("Error deleting data");
+    }
+  })
+}
+
 async function deleteTeam(_id: string): Promise<string> {
 
-  return new Promise(async(resolve, reject) => {
+  return new Promise(async (resolve, reject) => {
     try {
       const res = await Teams.deleteOne({
         "_id": new ObjectId(_id)
@@ -197,7 +243,7 @@ async function deleteTeam(_id: string): Promise<string> {
 
 async function deleteTimelineEvents(_id: string): Promise<string> {
 
-  return new Promise(async(resolve, reject) => {
+  return new Promise(async (resolve, reject) => {
     try {
       const res = await Events.deleteOne({
         "_id": new ObjectId(_id)
@@ -214,7 +260,7 @@ async function deleteTimelineEvents(_id: string): Promise<string> {
 
 async function deleteWing(_id: string): Promise<string> {
 
-  return new Promise(async(resolve, reject) => {
+  return new Promise(async (resolve, reject) => {
     try {
       const res = await Wings.deleteOne({
         "_id": new ObjectId(_id)
