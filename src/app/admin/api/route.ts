@@ -5,13 +5,13 @@ import Teams, { TeamMember } from "./models/teams"
 import Events, { EventsInterface } from "./models/events"
 import Wings, { ClubWings } from './models/wings';
 import Home, { HomeInterface } from "./models/home";
-
+import { cloudinary } from "@/lib/cloudinary"
 
 const Connection = async () => {
   const url = "mongodb://localhost:27017/estoria"
 
   try {
-    await mongoose.connect(url, { useNewUrlParser: true })
+    await mongoose.connect(url)
     console.log("Database Connected")
   } catch (err) {
     console.log("Error connecting to Estoria Database")
@@ -50,6 +50,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
         "eventType": request.eventType,
         "shortDescription": request.shortDescription,
         "detailedDescription": request.detailedDescription,
+        "registrationLink": request.registrationLink,
         "coverImageUrl": request.coverImageUrl,
         "galleryImageUrls": request.galleryImageUrls
       }
@@ -128,19 +129,20 @@ export async function DELETE(req: NextRequest, res: NextResponse) {
     const id = req.nextUrl.searchParams.get('_id');
     let response;
     if (collection === "teams") {
-      await deleteTeam(id.toString())
+      // await deleteTeamsImage(id.toString())
+      await deleteTeam(id!.toString())
         .then((msg) => response = msg)
         .catch((err) => response = err)
     } else if (collection === "events") {
-      await deleteTimelineEvents(id.toString())
+      await deleteTimelineEvents(id!.toString())
         .then((msg) => response = msg)
         .catch((err) => response = err)
     } else if (collection === "wings") {
-      await deleteWing(id.toString())
+      await deleteWing(id!.toString())
         .then((msg) => response = msg)
         .catch((err) => response = err)
     } else if (collection === "home") {
-      await deleteHomeData(id.toString())
+      await deleteHomeData(id!.toString())
         .then((msg) => response = msg)
         .catch((err) => response = err)
     }
@@ -149,6 +151,7 @@ export async function DELETE(req: NextRequest, res: NextResponse) {
     })
 
   } catch (error) {
+    console.log("Error : ",error)
     return NextResponse.json({
       message: "Error with params"
     }, {
@@ -157,12 +160,26 @@ export async function DELETE(req: NextRequest, res: NextResponse) {
   }
 }
 
+// async function deleteTeamsImage(id: string) {
+//   try {
+//     const data = await Teams.findById({ "_id": new ObjectId(id) })
+//     const imageUrl: string = data?.imageUrl!
+//     if(!imageUrl)return
+//     const publicId: string = imageUrl.substring(imageUrl.lastIndexOf('/')+1, imageUrl.lastIndexOf('.'))
+//     console.log("public id : ",publicId)
+//     console.log("imaeUrl : ",imageUrl)
+//     await cloudinary.uploader.destroy()
+//   } catch (error) {
+//     throw new Error("Cannot delete team image")
+//   }
+// }
+
 async function addHomeData(data: HomeInterface): Promise<string> {
   // console.log(data)
   return new Promise((resolve, reject) => {
     try {
       const res = Home.create(data)
-      resolve("success")
+      resolve("Success")
 
     } catch (error) {
       reject("Error adding data");
@@ -174,7 +191,7 @@ async function addTeams(data: TeamMember): Promise<string> {
   return new Promise((resolve, reject) => {
     try {
       const res = Teams.create(data)
-      resolve("success")
+      resolve("Success")
 
     } catch (error) {
       reject("Error adding data");
@@ -187,7 +204,7 @@ async function addTimelineEvents(data: EventsInterface): Promise<string> {
   return new Promise((resolve, reject) => {
     try {
       const res = Events.create(data)
-      resolve("success")
+      resolve("Success")
 
     } catch (error) {
       reject("Error adding data");
@@ -199,7 +216,7 @@ async function addWing(data: ClubWings): Promise<string> {
   return new Promise((resolve, reject) => {
     try {
       const res = Wings.create(data)
-      resolve("success")
+      resolve("Success")
 
     } catch (error) {
       reject("Error adding data");
@@ -214,7 +231,7 @@ async function deleteHomeData(_id: string): Promise<string> {
       const res = await Home.deleteOne({
         "_id": new ObjectId(_id)
       });
-      resolve("deleted")
+      resolve("Deleted")
 
     } catch (error) {
       // console.log("ID = ",_id)
@@ -231,7 +248,7 @@ async function deleteTeam(_id: string): Promise<string> {
       const res = await Teams.deleteOne({
         "_id": new ObjectId(_id)
       });
-      resolve("deleted")
+      resolve("Deleted")
 
     } catch (error) {
       // console.log("ID = ",_id)
@@ -248,7 +265,7 @@ async function deleteTimelineEvents(_id: string): Promise<string> {
       const res = await Events.deleteOne({
         "_id": new ObjectId(_id)
       });
-      resolve("deleted")
+      resolve("Deleted")
 
     } catch (error) {
       // console.log("ID = ",_id)
@@ -265,7 +282,7 @@ async function deleteWing(_id: string): Promise<string> {
       const res = await Wings.deleteOne({
         "_id": new ObjectId(_id)
       });
-      resolve("deleted")
+      resolve("Deleted")
 
     } catch (error) {
       // console.log("ID = ",_id)

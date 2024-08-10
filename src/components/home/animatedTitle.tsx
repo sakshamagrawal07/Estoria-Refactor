@@ -9,6 +9,7 @@ export default function AnimatedTitle() {
 
   useEffect(() => {
     const canvas = canvasRef.current;
+    //@ts-ignore
     const ctx = canvas.getContext('2d');
     const w = window.innerWidth;
     const h = window.innerHeight;
@@ -19,8 +20,9 @@ export default function AnimatedTitle() {
     const parts = new Array();
     const colors = ["red", "#f57900", "yellow", "#ce5c00", "#5c3566"];
     const mouse = { x: 0, y: 0 };
-
+    //@ts-ignore
     canvas.width = w;
+    //@ts-ignore
     canvas.height = h;
 
     let time = 0;
@@ -63,13 +65,13 @@ export default function AnimatedTitle() {
       requestAnimationFrame(particles);
     }
 
-    function DistanceBetween(p1, p2) {
+    function DistanceBetween(p1:any, p2:any) {
       const dx = p2.x - p1.x;
       const dy = p2.y - p1.y;
       return Math.sqrt(dx * dx + dy * dy);
     }
 
-    function MouseMove(e) {
+    function MouseMove(e:any) {
       mouse.x = e.clientX;
       mouse.y = e.clientY;
     }

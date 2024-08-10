@@ -1,15 +1,25 @@
 'use client'
 
-import CardsModal from "@/components/admin/teams/cardsModal";
-import SliderModal from "@/components/admin/teams/sliderModal";
+import CardsModal from "./cardsModal";
+import SliderModal from "./sliderModal";
 import { Button, Link, Table, TableBody, TableCell, TableColumn, TableHeader, TableRow } from "@nextui-org/react";
 import "./globals.css"
 import { useEffect, useState } from "react";
-import { HomeInterface } from "../../api/models/home";
+import toast from "react-hot-toast";
+
+interface Home{
+    _id: string;
+    title ?: string;
+    cardType ?: string;
+    description: string;
+    image ?: string;
+    imageUrls ?: string[];
+}
 
 export default function App({ }) {
 
-    const [data, setData] = useState<HomeInterface[]>([])
+    const [data, setData] = useState<Home[]>([])
+    const [isLoading, setIsLoading] = useState<boolean>(false)
 
     useEffect(() => {
         fetch('http://localhost:3000/admin/api/home')
@@ -19,6 +29,7 @@ export default function App({ }) {
     }, []);
 
     async function handleRemove(_id: string) {
+        setIsLoading(true)
         console.log("sendData = ", _id)
         const res: Response = await fetch(`http://localhost:3000/admin/api/home?_id=${_id}`, {
             method: 'DELETE',
@@ -27,6 +38,12 @@ export default function App({ }) {
             }
         })
         const response = await res.json()
+        if (response.status === 200) {
+            toast.success(`${response.message}\nRefresh page to see updated data.`)
+        } else {
+            toast.error(`${response.message}\nTry again.`)
+        }
+        setIsLoading(false)
         console.log(response.message);
     }
 
@@ -52,14 +69,14 @@ export default function App({ }) {
                 </TableHeader>
                 <TableBody>
                     {
-                        data.map((card: object) => {
+                        data.map((card: Home) => {
                             return (
                                 <TableRow key={card._id}>
                                     <TableCell>{card.cardType}</TableCell>
                                     <TableCell>{card.title}</TableCell>
                                     <TableCell>{card.description}</TableCell>
                                     <TableCell>
-                                        {card.image &&  <Link
+                                        {card.image && <Link
                                             isBlock
                                             showAnchorIcon
                                             isExternal
@@ -68,7 +85,7 @@ export default function App({ }) {
                                             Image
                                         </Link>}
                                         {
-                                            card.imageUrls.map((urls: string,index:number) => {
+                                            card.imageUrls!.map((urls: string, index: number) => {
                                                 return (
                                                     <Link
                                                         isBlock
@@ -76,15 +93,15 @@ export default function App({ }) {
                                                         isExternal
                                                         href={urls}
                                                         color="primary">
-                                                        {`Image ${index+1}`}
+                                                        {`Image ${index + 1}`}
                                                     </Link>
                                                 )
                                             })
                                         }
                                     </TableCell>
                                     <TableCell>
-                                        <Button color="danger" variant="flat" size="sm" type="submit" onClick={() => { handleRemove(card._id) }}>
-                                            Remove
+                                        <Button color="danger" variant="flat" size="sm" type="submit" onClick={() => { handleRemove(card._id) }} isLoading={isLoading}>
+                                            {isLoading ? "Removing" : "Remove"}
                                         </Button>
                                     </TableCell>
                                 </TableRow>

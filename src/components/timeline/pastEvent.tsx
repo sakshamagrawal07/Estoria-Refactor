@@ -29,6 +29,7 @@ export default function PastEvent() {
                 <ul>
                     {items.map((_, index) => {
                         const [ref, inView] = useInView({ threshold: 0.5 });
+                        //@ts-ignore
                         refs.current[index] = ref;
 
                         return (

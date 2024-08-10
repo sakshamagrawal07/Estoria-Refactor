@@ -12,7 +12,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
         })
 
         let returnResponse;
-        if (response.status == 200) returnResponse = "success";
+        if (response.status == 200) returnResponse = "Success";
         else returnResponse = "Error from server";
         return NextResponse.json({
             message: returnResponse,
@@ -39,7 +39,7 @@ export async function GET(req: NextRequest, res: NextResponse) {
         })
     }catch(error){
         return NextResponse.json({
-            message: "Error sending data to database",
+            message: "Error getting data from database",
         })
     }
 }

@@ -15,6 +15,8 @@ import {
 } from "@nextui-org/react";
 import PlusIcon from "@/components/plusIcon";
 import { TeamMember } from "../../api/models/teams";
+import toast from 'react-hot-toast';
+import { differentTeams } from './differentTeams';
 
 interface InputChangeInterface {
     target: HTMLInputElement;
@@ -24,6 +26,7 @@ interface InputChangeInterface {
 export default function AddNewModal() {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
     const [isInvalid, setIsInvalid] = useState(true);
+    const [isLoading, setIsLoading] = useState(false)
 
     const [name, setName] = useState("")
     const [position, setPosition] = useState("")
@@ -31,10 +34,23 @@ export default function AddNewModal() {
     const [insta, setInsta] = useState("")
     const [linkedin, setlinkedin] = useState("")
     const [github, setGithub] = useState("")
-    
+
     const [imageUrl, setImageUrl] = useState<string>('');
 
     async function submitForm() {
+        if (name === "") {
+            toast.error("Name is required.")
+            return
+        }
+        if (position === "") {
+            toast.error("Position is required.")
+            return
+        }
+        if (isInvalid) {
+            toast.error("Select atleast one team.")
+            return
+        }
+        setIsLoading(true)
         const data: TeamMember = {
             name: name,
             position: position,
@@ -46,10 +62,19 @@ export default function AddNewModal() {
         }
         console.log('Uploaded image:', imageUrl);
         await sendData(data)
+        setIsLoading(false)
+        setName("")
+        setPosition("")
+        setTeams([])
+        setInsta("")
+        setlinkedin("")
+        setGithub("")
+        setImageUrl("")
+        setIsInvalid(true)
     }
 
     async function sendData(data: TeamMember) {
-        const res: Response = await fetch("./api/teams", {
+        const res: Response = await fetch("../api/teams", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -57,11 +82,17 @@ export default function AddNewModal() {
             body: JSON.stringify(data),
         })
         const response = await res.json()
+        if (response.status === 200) {
+            toast.success(`${response.message}\nRefresh page to see newly added data.`)
+        } else {
+            toast.error(`${response.message}\nTry again.`)
+        }
         console.log(response.message);
     }
 
-    const handleUpload = (result) => {
+    const handleUpload = (result:any) => {
         if (result.event === 'success') {
+            console.log("Image Upload Reasult : ", result)
             setImageUrl(result.info.url);
         }
     };
@@ -98,6 +129,7 @@ export default function AddNewModal() {
                                         autoFocus
                                         label="Name"
                                         variant="underlined"
+                                        value={name}
                                         onChange={(e: InputChangeInterface) => setName(e.target.value)}
                                     />
                                     <Input
@@ -105,24 +137,28 @@ export default function AddNewModal() {
                                         isClearable
                                         label="Position"
                                         variant="underlined"
+                                        value={position}
                                         onChange={(e: InputChangeInterface) => setPosition(e.target.value)}
                                     />
                                     <Input
                                         isClearable
                                         label="Insta link"
                                         variant="underlined"
+                                        value={insta}
                                         onChange={(e: InputChangeInterface) => setInsta(e.target.value)}
                                     />
                                     <Input
                                         isClearable
                                         label="LinkedIn link"
                                         variant="underlined"
+                                        value={linkedin}
                                         onChange={(e: InputChangeInterface) => setlinkedin(e.target.value)}
                                     />
                                     <Input
                                         isClearable
                                         label="GitHub link"
                                         variant="underlined"
+                                        value={github}
                                         onChange={(e: InputChangeInterface) => setGithub(e.target.value)}
                                     />
                                     <div className="flex py-2 px-1 justify-between">
@@ -132,13 +168,22 @@ export default function AddNewModal() {
                                             isInvalid={isInvalid}
                                             label="Select team(s)"
                                             description="Choose Club only for Club Lead & Co-Lead"
+                                            value={teams}
                                             onValueChange={(value) => {
                                                 setIsInvalid(value.length < 1);
+                                                //@ts-ignore
                                                 setTeams(value)
                                             }}
                                         >
-                                            <Checkbox value="Club">Club</Checkbox>
-                                            <Checkbox value="Acting">Acting</Checkbox>
+                                            {
+                                                differentTeams.map((team,index) => {
+
+                                                    return (
+                                                        <Checkbox value={team} key={index}>{team}</Checkbox>
+                                                    );
+                                                })
+                                            }
+                                            {/* <Checkbox value="Acting">Acting</Checkbox>
                                             <Checkbox value="Poetry">Poetry</Checkbox>
                                             <Checkbox value="Cinematography">Cinematography</Checkbox>
                                             <Checkbox value="Script-Writing">Script-Writing</Checkbox>
@@ -146,7 +191,7 @@ export default function AddNewModal() {
                                             <Checkbox value="External Affairs">External Affairs</Checkbox>
                                             <Checkbox value="Design">Design</Checkbox>
                                             <Checkbox value="Social Media">Social Media</Checkbox>
-                                            <Checkbox value="Developers">Developers</Checkbox>
+                                            <Checkbox value="Developers">Developers</Checkbox> */}
                                         </CheckboxGroup>
                                     </div>
                                     {/* <CldUploadButton
@@ -159,6 +204,7 @@ export default function AddNewModal() {
                                         Upload Image
                                     </CldUploadButton> */}
                                     <CldUploadWidget
+
                                         uploadPreset="h7tbopug"
                                         onSuccess={(results, options) => {
                                             handleUpload(results)
@@ -166,7 +212,7 @@ export default function AddNewModal() {
                                     >
                                         {({ open }) => {
                                             return (
-                                                <Button color="primary" variant="solid" onPress={() => open()}>
+                                                <Button color="primary" variant="solid" onPress={() => open()} disabled={isLoading}>
                                                     Upload Image
                                                 </Button>
                                             );
@@ -175,11 +221,11 @@ export default function AddNewModal() {
 
                                 </ModalBody>
                                 <ModalFooter>
-                                    <Button color="danger" variant="flat" onPress={onClose}>
+                                    <Button color="danger" variant="flat" onPress={onClose} disabled={isLoading} >
                                         Cancel
                                     </Button>
-                                    <Button color="success" onPress={submitForm} endContent={<PlusIcon />} variant="flat" type="submit">
-                                        Add
+                                    <Button color="success" onPress={submitForm} endContent={!isLoading && <PlusIcon />} variant="flat" isLoading={isLoading}>
+                                        {isLoading ? "Adding" : "Add"}
                                     </Button>
                                 </ModalFooter>
                             </form>

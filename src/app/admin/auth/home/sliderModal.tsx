@@ -15,6 +15,7 @@ import {
 import { CldUploadWidget } from "next-cloudinary";
 import { PlusIcon } from "lucide-react";
 import { HomeInterface } from "@/app/admin/api/models/home";
+import toast from "react-hot-toast";
 
 interface InputChangeInterface {
     target: HTMLInputElement;
@@ -25,11 +26,20 @@ export default function SliderModal() {
 
     const [title, setTitle] = useState<string>("");
     const [description, setDescription] = useState<string>("");
+    const [isLoading, setIsLoading] = useState<boolean>(false)
 
-    const [image, setImage] = useState<string>('');
+    const [image, setImage] = useState<string>("");
 
 
     async function submitForm() {
+        if(title===""){
+            toast.error("Title is required.")
+            return
+        }
+        if(description===""){
+            toast.error("Description is required.")
+        }
+        setIsLoading(true)
         const data: HomeInterface = {
             title: title,
             description: description,
@@ -37,6 +47,10 @@ export default function SliderModal() {
             cardType: "Slider"
         }
         await sendData(data)
+        setIsLoading(false)
+        setTitle("")
+        setDescription("")
+        setImage("")
     }
 
     async function sendData(data: HomeInterface) {
@@ -48,10 +62,15 @@ export default function SliderModal() {
             body: JSON.stringify(data),
         })
         const response = await res.json()
+        if(response.staus===200){
+            toast.success(`${response.message}\nRefresh page to see newly added data.`)
+        } else {
+            toast.error(`${response.message}\nTry Again.`)
+        }
         console.log(response.message);
     }
 
-    const handleOnSuccess = (result:any) => {
+    const handleOnSuccess = (result: any) => {
         if (result.event === 'success') {
             setImage(result.info.url);
         }
@@ -86,6 +105,7 @@ export default function SliderModal() {
                                     autoFocus
                                     label="Title"
                                     variant="underlined"
+                                    value={title}
                                     onChange={(e: InputChangeInterface) => setTitle(e.target.value)}
                                 />
                                 <Input
@@ -93,6 +113,7 @@ export default function SliderModal() {
                                     autoFocus
                                     label="Short description"
                                     variant="underlined"
+                                    value={description}
                                     onChange={(e: InputChangeInterface) => setDescription(e.target.value)}
                                 />
                                 <CldUploadWidget
@@ -103,7 +124,7 @@ export default function SliderModal() {
                                 >
                                     {({ open }) => {
                                         return (
-                                            <Button color="primary" variant="solid" onPress={() => open()}>
+                                            <Button color="primary" variant="solid" onPress={() => open()} isDisabled={isLoading}>
                                                 Upload Image
                                             </Button>
                                         );
@@ -111,11 +132,11 @@ export default function SliderModal() {
                                 </CldUploadWidget>
                             </ModalBody>
                             <ModalFooter>
-                                <Button color="danger" variant="flat" onPress={onClose}>
+                                <Button color="danger" variant="flat" onPress={onClose} isDisabled={isLoading}>
                                     Cancel
                                 </Button>
-                                <Button color="success" onPress={submitForm} endContent={<PlusIcon />} variant="flat" type="submit">
-                                    Add
+                                <Button color="success" onPress={submitForm} endContent={!isLoading&&<PlusIcon />} variant="flat" isLoading={isLoading}>
+                                    {isLoading ? "Adding" : "Add"}
                                 </Button>
                             </ModalFooter>
                         </>

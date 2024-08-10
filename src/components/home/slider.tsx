@@ -36,14 +36,18 @@ export default function Slider() {
 
     const handleNext = () => {
         if (slideRef.current) {
+            //@ts-ignore
             const items = slideRef.current.querySelectorAll('.item');
+            //@ts-ignore
             slideRef.current.appendChild(items[0]);
         }
     };
-
+    
     const handlePrev = () => {
         if (slideRef.current) {
+            //@ts-ignore
             const items = slideRef.current.querySelectorAll('.item');
+            //@ts-ignore
             slideRef.current.prepend(items[items.length - 1]);
         }
     };
