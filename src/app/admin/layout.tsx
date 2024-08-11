@@ -1,3 +1,4 @@
+import { Toaster } from "react-hot-toast"
 import { Providers } from "../(app)/providers"
 
 export const metadata = {
@@ -15,6 +16,7 @@ export default function RootLayout({
       <body>
         <Providers>
           {children}
+          <Toaster/>
         </Providers>
       </body>
     </html>

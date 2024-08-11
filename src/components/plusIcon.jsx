@@ -1,5 +1,5 @@
 import React from "react";
-export default function PlusIcon({ size = 24, width, height, ...props }) {
+export default function PlusIcon({ size = 24, width=24, height=24, ...props }) {
 
     return (
         <svg

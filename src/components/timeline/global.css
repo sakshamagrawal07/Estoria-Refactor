@@ -225,8 +225,8 @@ body {
     }
 
     .upcoming-event-container .card {
-        height: 370px;
-        width: 400px;
+        max-height: 370px;
+        max-width: 400px;
         padding: 10px;
     }
 
@@ -249,6 +249,9 @@ body {
 .upcoming-event-container {
     margin: 0 auto;
     flex-wrap: wrap;
+    display: flex;
+    align-items: center;
+    height: auto;
 }
 
 .samkaran {
@@ -287,6 +290,7 @@ body {
 .upcoming-event-container .card {
     width: 44%;
     height: 100%;
+    max-height: 400px;
     padding-left: 10px;
     position: relative;
     background: #282c34;

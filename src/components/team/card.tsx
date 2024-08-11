@@ -1,3 +1,5 @@
+// "use client"
+
 import { Github, Instagram, Linkedin } from "lucide-react";
 import "./global.css"
 

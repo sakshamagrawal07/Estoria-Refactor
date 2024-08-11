@@ -7,21 +7,9 @@ import NavBar from "../../navbar";
 import DataTable from "./table";
 import AddNewModal from "./modal";
 import { TeamMember } from "../../api/models/teams";
+import { differentTeams } from "./differentTeams";
 
 export default function App() {
-
-    const teams = [
-        "Club",
-        "Acting",
-        "Poetry",
-        "Cinematography",
-        "Script-Writing",
-        "Management",
-        "External Affairs",
-        "Design",
-        "Social Media",
-        "Developers"
-    ];
 
     const [data, setData] = useState<TeamMember[]>([]);
 
@@ -46,7 +34,7 @@ export default function App() {
             <div className="flex flex-wrap gap-4 navbar">
                 <Tabs key="primary" color="secondary" aria-label="Tabs colors" radius="full" defaultSelectedKey="home" className="tabs">
                     {
-                        teams.map((team) => {
+                        differentTeams.map((team) => {
                             const tableData = data.filter((member: TeamMember) => {
                                 return member.teams.includes(team);
                             });

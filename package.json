@@ -11,6 +11,7 @@
   "dependencies": {
     "@nextui-org/react": "^2.4.2",
     "@types/mongoose": "^5.11.97",
+    "cloudinary": "^2.4.0",
     "express": "^4.19.2",
     "framer-motion": "^11.2.11",
     "lucide-react": "^0.407.0",
@@ -23,6 +24,7 @@
     "react-dom": "^18",
     "react-grid-gallery": "^1.0.1",
     "react-hook-inview": "^4.5.1",
+    "react-hot-toast": "^2.4.1",
     "vanilla-tilt": "^1.8.1",
     "yet-another-react-lightbox": "^3.21.3"
   },
