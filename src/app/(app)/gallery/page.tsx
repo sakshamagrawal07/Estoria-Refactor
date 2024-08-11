@@ -5,7 +5,6 @@ import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 import { images, CustomImage } from "./images";
 import "./globals.css";
-import Image from "next/image";
 
 const slides = images.map(({ original, width, height }) => ({
   src: original,
@@ -16,6 +15,7 @@ const slides = images.map(({ original, width, height }) => ({
 export default function App() {
   const [index, setIndex] = useState(-1);
   const [searchTerm, setSearchTerm] = useState("");
+  const [selectedEvent, setSelectedEvent] = useState("");
 
   const handleClick = (index: number, item: CustomImage) => setIndex(index);
 
@@ -23,28 +23,36 @@ export default function App() {
     setSearchTerm(event.target.value);
   };
 
+  const handleEventChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedEvent(event.target.value);
+  };
+
   const filteredImages = images.filter((image) => {
-    const keywords = image.keywords || [];
     const searchTermLower = searchTerm.toLowerCase();
-    return keywords.some((keyword) => keyword.includes(searchTermLower));
+    const eventNameMatch = selectedEvent
+      ? image.eventName === selectedEvent
+      : true;
+    const searchMatch = image.eventName
+      ?.toLowerCase()
+      .includes(searchTermLower);
+
+    return eventNameMatch && searchMatch;
   });
+  console.log(filteredImages);
   const filteredSlides = filteredImages.map(({ original, width, height }) => ({
     src: original,
     width,
     height,
   }));
 
+  const uniqueEventNames = Array.from(
+    new Set(images.map((image) => image.eventName))
+  );
+
   return (
     <>
       <div className="head">
         <div className="text-center header">
-          <Image
-            src='/logo.webp'
-            alt='logo'
-            width={120}
-            height={120}
-            className="mt-2 absolute left-0"
-          />
           <span>G</span>
           <span className="samkaran">allery</span>
         </div>
@@ -56,7 +64,7 @@ export default function App() {
             <input
               type="text"
               id="simple-search"
-              className="border block w-full ps-10 p-2.5"
+              className="block w-full ps-10 p-2.5"
               placeholder="Search events..."
               required
               value={searchTerm}
@@ -65,7 +73,7 @@ export default function App() {
           </div>
           <button
             type="submit"
-            className="button p-2.5 ms-2 text-sm font-medium text-white border"
+            className="button p-2.5 ms-2 text-sm font-medium text-white"
           >
             <svg
               className="w-6 h-6"
@@ -85,8 +93,22 @@ export default function App() {
             <span className="sr-only">Search</span>
           </button>
         </form>
+        <div className="mb-4 pr-1">
+          <select
+            value={selectedEvent}
+            onChange={handleEventChange}
+            className="p-2 w-full rounded-md"
+          >
+            <option value="">All Events</option>
+            {uniqueEventNames.map((eventName) => (
+              <option key={eventName} value={eventName}>
+                {eventName}
+              </option>
+            ))}
+          </select>
+        </div>
       </div>
-      <div className="p-2 border rounded-md mb-2">
+      <div className="p-2 rounded-md mb-2">
         {filteredImages.length > 0 ? (
           <>
             <Gallery
