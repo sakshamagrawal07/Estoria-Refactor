@@ -1,5 +1,7 @@
+import { Github, Instagram, Linkedin, Mail, Phone } from "lucide-react"
 import "./globals.css"
 import Slider from "./slider"
+import Link from "next/link";
 
 export default function Card() {
 
@@ -40,10 +42,10 @@ export default function Card() {
                         </div>
                         <div className="sub-right">
                             <div className="gallery">
-                                <img src="https://picsum.photos/id/815/400/400" alt="Two hands creating a heart and showing the sun" />
-                                <img src="https://picsum.photos/id/872/400/400" alt="The mountain" />
-                                <img src="https://picsum.photos/id/603/400/400" alt="a river" />
-                                <img src="https://picsum.photos/id/823/400/400" alt="a women with a camera" />
+                                <img src="../../../../../logo1.jpg" alt="Estoria" />
+                                <img src="../../../../../logo1.jpg" alt="Estoria" />
+                                <img src="../../../../../logo1.jpg" alt="Estoria" />
+                                <img src="../../../../../logo1.jpg" alt="Estoria" />
                             </div>
                         </div>
                     </div>
@@ -70,17 +72,17 @@ export default function Card() {
                         </div>
                         <div className="sub-right">
                             <div className="gallery">
-                                <img src="https://picsum.photos/id/815/400/400" alt="Two hands creating a heart and showing the sun" />
-                                <img src="https://picsum.photos/id/872/400/400" alt="The mountain" />
-                                <img src="https://picsum.photos/id/603/400/400" alt="a river" />
-                                <img src="https://picsum.photos/id/823/400/400" alt="a women with a camera" />
+                                <img src="../../../../../logo1.jpg" alt="Estoria" />
+                                <img src="../../../../../logo1.jpg" alt="Estoria" />
+                                <img src="../../../../../logo1.jpg" alt="Estoria" />
+                                <img src="../../../../../logo1.jpg" alt="Estoria" />
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <Slider/>
+            <Slider />
 
             <div className="container" style={style3}>
                 <div className="bg-1"></div>
@@ -101,10 +103,10 @@ export default function Card() {
                         </div>
                         <div className="sub-right">
                             <div className="gallery">
-                                <img src="https://picsum.photos/id/815/400/400" alt="Two hands creating a heart and showing the sun" />
-                                <img src="https://picsum.photos/id/872/400/400" alt="The mountain" />
-                                <img src="https://picsum.photos/id/603/400/400" alt="a river" />
-                                <img src="https://picsum.photos/id/823/400/400" alt="a women with a camera" />
+                                <img src="../../../../../logo1.jpg" alt="Estoria" />
+                                <img src="../../../../../logo1.jpg" alt="Estoria" />
+                                <img src="../../../../../logo1.jpg" alt="Estoria" />
+                                <img src="../../../../../logo1.jpg" alt="Estoria" />
                             </div>
                         </div>
                     </div>
@@ -119,16 +121,34 @@ export default function Card() {
                     </div>
                 </div>
                 <div className="lower flex flex-row">
-                    <div className="sub-container flex-row-reverse">
-                        <div className="sub-left flex text">
-                            <div className="contact">
-                                <div className="contact-item">
-                                    <div className="contact-item-header">Phone</div>
-                                    <div className="contact-item-content">+91 1234567890</div>
+                    <div className="sub-container flex-row-reverse h-[1px]">
+                        <div className="sub-left flex text h-full">
+                            <div className="w-full h-full flex flex-wrap flex-col">
+                                <div className="flex justify-between w-full items-start contact-us">
+                                    <div className="flex flex-col w-1/2 h-1/2 p-10">
+                                        <div className="mr-2 rounded-full w-12 h-12 flex"><Phone size={35} /></div>
+                                        <p className="title">CALL US :</p>
+                                        <p className="contact-name">Sameer Jain (Club Lead)</p>
+                                        <p className="phone">+91 1234567890</p>
+                                        <p className="contact-name">Sameer Jain (Club Co-Lead)</p>
+                                        <p className="phone">+91 1234567890</p>
+                                    </div>
+                                    <div className="flex flex-col w-1/2 h-1/2">
+                                        <div className="mr-2 rounded-full w-12 h-12 flex"><Mail size={35} /></div>
+                                        <p className="title">EMAIL US :</p>
+                                        <p>estoria@iiitn.ac.in</p>
+                                    </div>
                                 </div>
-                                <div className="contact-item">
-                                    <div className="contact-item-header">Email</div>
-                                    <div className="contact-item-content">estoria@iiitn.ac.in</div>
+                                <div className="flex flex-col">
+                                    <p className="title">FOLLOW US ON :</p>
+                                    <div className="flex justify-between mt-2 w-auto">
+                                        <Link href="https://www.instagram.com/estoria_iiitn/" rel="noopener noreferrer" target="_blank" >
+                                            <Instagram className="social-icons" size={30} />
+                                        </Link>
+                                        {/* <Link href="/" color="warning" className="text-black" rel="noopener noreferrer" target="_blank" >
+                                            <Linkedin className="social-icons" size={30} />
+                                        </Link> */}
+                                    </div>
                                 </div>
                             </div>
                         </div>

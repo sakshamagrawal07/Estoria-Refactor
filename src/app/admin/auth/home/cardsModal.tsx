@@ -46,10 +46,6 @@ export default function CardsModal() {
             toast.error("Card type is required.")
             return
         }
-        if(imageUrls.length<4){
-            toast.error("Atleast 4 images are required.")
-            return
-        }
         setIsLoading(true)
         const data: HomeInterface = {
             description: description,
@@ -72,6 +68,7 @@ export default function CardsModal() {
             body: JSON.stringify(data),
         })
         const response = await res.json()
+        // console.log("RESPONSE : ",res.status)
         if(response.status===200){
             toast.success(`${response.message}\nRefresh page to see newly added data.`)
         } else{

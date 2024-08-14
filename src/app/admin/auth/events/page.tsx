@@ -7,14 +7,9 @@ import NavBar from "../../navbar";
 import DataTable from "./table";
 import AddNewModal from "./modal";
 import { EventsInterface } from "../../api/models/events";
+import { differentEventTypes } from "@/lib/differentEventTypes";
 
 export default function App() {
-
-    const eventsType = [
-        "Up-Coming Events",
-        "Past Events"
-    ]
-
     const [data, setData] = useState<EventsInterface[]>([])
 
     useEffect(() => {
@@ -30,11 +25,9 @@ export default function App() {
             <div className="flex flex-wrap gap-4 navbar">
                 <Tabs key="primary" color="secondary" aria-label="Tabs colors" radius="full" defaultSelectedKey="home" className="tabs">
                     {
-                        eventsType.map((eventType) => {
-                            const tableData = data.filter((event: EventsInterface) => {
-                                return event.eventType === eventType;
-                            })
-
+                        differentEventTypes.map((eventType) => {
+                            //@ts-ignore
+                            const tableData = data[eventType] || []
                             return (
                                 < Tab key={eventType} title={eventType} className="tabContent" >
                                     < DataTable tableData={tableData} />

@@ -38,7 +38,7 @@ export default function App({ }) {
             }
         })
         const response = await res.json()
-        if (response.status === 200) {
+        if (response.status === "200") {
             toast.success(`${response.message}\nRefresh page to see updated data.`)
         } else {
             toast.error(`${response.message}\nTry again.`)
@@ -100,7 +100,7 @@ export default function App({ }) {
                                         }
                                     </TableCell>
                                     <TableCell>
-                                        <Button color="danger" variant="flat" size="sm" type="submit" onClick={() => { handleRemove(card._id) }} isLoading={isLoading}>
+                                        <Button color="danger" variant="flat" size="sm" onClick={() => { handleRemove(card._id) }} isLoading={isLoading}>
                                             {isLoading ? "Removing" : "Remove"}
                                         </Button>
                                     </TableCell>

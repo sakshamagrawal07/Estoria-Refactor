@@ -176,7 +176,7 @@ export default function AddNewModal() {
                                     </RadioGroup>
                                 </div>
                                 <CldUploadWidget
-                                    uploadPreset="h7tbopug"
+                                    uploadPreset={process.env.CLOUDINARY_UPLOAD_PRESET}
                                     onSuccess={(results, options) => {
                                         handleOnSuccess(results)
                                     }}
@@ -190,7 +190,7 @@ export default function AddNewModal() {
                                     }}
                                 </CldUploadWidget>
                                 <CldUploadWidget
-                                    uploadPreset="h7tbopug"
+                                    uploadPreset={process.env.CLOUDINARY_UPLOAD_PRESET}
                                     onQueuesEnd={(results, options) => {
                                         handleOnQueuesEnd(results)
                                     }}

@@ -16,7 +16,7 @@ import {
 import PlusIcon from "@/components/plusIcon";
 import { TeamMember } from "../../api/models/teams";
 import toast from 'react-hot-toast';
-import { differentTeams } from './differentTeams';
+import { differentTeams } from '@/lib/differentTeams';
 
 interface InputChangeInterface {
     target: HTMLInputElement;
@@ -205,7 +205,7 @@ export default function AddNewModal() {
                                     </CldUploadButton> */}
                                     <CldUploadWidget
 
-                                        uploadPreset="h7tbopug"
+                                        uploadPreset={process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET}
                                         onSuccess={(results, options) => {
                                             handleUpload(results)
                                         }}

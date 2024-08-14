@@ -7,7 +7,7 @@ import NavBar from "../../navbar";
 import DataTable from "./table";
 import AddNewModal from "./modal";
 import { TeamMember } from "../../api/models/teams";
-import { differentTeams } from "./differentTeams";
+import { differentTeams } from "@/lib/differentTeams";
 
 export default function App() {
 
@@ -16,16 +16,7 @@ export default function App() {
     useEffect(() => {
         fetch('http://localhost:3000/admin/api/teams')
             .then(response => response.json())
-            .then(res => {
-                if (Array.isArray(res.message)) {
-                    setData(res.message);
-                } else {
-                    console.error("Unexpected response format:", res.message);
-                }
-            })
-            .catch(error => {
-                console.error("Error fetching data:", error);
-            });
+            .then(res => {setData(res.message)})
     }, []);
 
     return (
@@ -35,10 +26,8 @@ export default function App() {
                 <Tabs key="primary" color="secondary" aria-label="Tabs colors" radius="full" defaultSelectedKey="home" className="tabs">
                     {
                         differentTeams.map((team) => {
-                            const tableData = data.filter((member: TeamMember) => {
-                                return member.teams.includes(team);
-                            });
-
+                            //@ts-ignore
+                            const tableData = data[team] || []
                             return (
                                 <Tab key={team} title={team} className="tabContent">
                                     <DataTable tableData={tableData} />

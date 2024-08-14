@@ -13,10 +13,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="dark text-foreground bg-background">
+      <header>
+        <link rel="shortcut icon" href="../../../../../logo2.png" type="image/x-icon" />
+      </header>
       <body>
         <Providers>
           {children}
-          <Toaster/>
+          <Toaster />
         </Providers>
       </body>
     </html>

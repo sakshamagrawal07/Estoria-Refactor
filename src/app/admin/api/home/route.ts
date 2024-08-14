@@ -1,24 +1,31 @@
+import { ObjectId } from 'mongodb';
 import { NextRequest, NextResponse } from 'next/server'
+import Home from '../models/home';
+import { ConnectDB } from '../route';
+
+ConnectDB()
 
 export async function POST(req: NextRequest, res: NextResponse) {
     try {
         const request = await req.json();
-        const response: Response = await fetch("http://localhost:3000/admin/api?collection=home", {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(request),
-        })
-        let returnResponse;
-        if (response.status == 200) returnResponse = "success";
-        else returnResponse = "Error from server";
+        const data = {
+            "title": request?.title,
+            "cardType": request?.cardType,
+            "description": request.description,
+            "image": request?.image,
+            "imageUrls": request?.imageUrls
+        }
+        const res = await Home.create(data)
         return NextResponse.json({
-            message: returnResponse,
+            message: "Success",
+        },{
+            status:200
         })
-    }catch(error){
+    } catch (error) {
         return NextResponse.json({
             message: "Error sending data to database",
+        },{
+            status:500
         })
     }
 }
@@ -26,41 +33,38 @@ export async function POST(req: NextRequest, res: NextResponse) {
 export async function GET(req: NextRequest, res: NextResponse) {
 
     try {
-        const response: Response = await fetch("http://localhost:3000/admin/api?collection=home", {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            }
-        })
-        let returnResponse=(await response.json()).message;
+        const data = await Home.find({})
         return NextResponse.json({
-            message: returnResponse,
+            message: data,
+        },{
+            status:200
         })
-    }catch(error){
+    } catch (error) {
         return NextResponse.json({
             message: "Error sending data to database",
+        },{
+            status:500
         })
     }
 }
 
-
 export async function DELETE(req: NextRequest, res: NextResponse) {
-
     try {
         const id = req.nextUrl.searchParams.get('_id');
-        const response: Response = await fetch(`http://localhost:3000/admin/api?collection=home&_id=${id}`, {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json',
-            }
-        })
-        let returnResponse=(await response.json()).message;
+        const res = await Home.deleteOne({
+            "_id": new ObjectId(id!.toString())
+        });
         return NextResponse.json({
-            message: returnResponse,
+            message: "Deleted"
+        }, {
+            status: 200
         })
-    }catch(error){
+    } catch (error) {
+        console.log("Error : ", error)
         return NextResponse.json({
-            message: "Error deleting data from database",
+            message: "Error with params"
+        }, {
+            status: 500
         })
     }
 }

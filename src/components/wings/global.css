@@ -44,6 +44,11 @@ body {
     src: url("../../../public/samkaran.TTF") format("truetype");
 }
 
+@font-face {
+    font-family: "Bavalor";
+    src: url("../../../public/Bavalor.ttf") format("truetype");
+}
+
 .flex {
     display: flex;
     align-items: center;
@@ -109,25 +114,30 @@ body {
     justify-content: space-evenly;
     align-items: center;
     max-width: 1500px;
+    height: auto;
     flex-wrap: wrap;
     z-index: 1;
 }
 
 .content .card {
     position: relative;
-    width: 200px;
-    height: 300px;
-    margin: 20px;
+    min-width: 300px;
+    width: 30%;
+    min-height: 400px;
+    height: auto;
+    margin: 50px;
     box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.5);
     background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+
     overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
-    border-top: 1px solid rgba(232, 199, 199, 0.5);
-    border-left: 1px solid rgba(232, 199, 199, 0.5);
     border-radius: 15px;
-    padding: 10px;
+    padding: 20px;
     backdrop-filter: blur(5px);
 }
 
@@ -137,28 +147,30 @@ body {
     /* transform: translateY(120px); */
     /* opacity: 0; */
     transition: 0.5s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 /* .content .card:hover .content{
     transform: translateY(0px);
     opacity: 1;
   } */
-.content .card .content h2 {
-    position: absolute;
-    top: -130px;
-    right: 20px;
-    font-size: 6em;
-    color: rgb(50, 67, 84);
-}
 
 .content .card .content h3 {
-    font-size: 1.8em;
+    font-size: 3em;
     color: white;
     z-index: 1;
+    margin-bottom: 10px;
+    font-family: "Bavalor";
+
 }
 
 .content .card .content p {
-    font-size: 1em;
+    font-family: "ubuntu";
+    margin-top: 15px;
+    font-size: 1.25em;
     color: white;
     font-weight: 300;
 }

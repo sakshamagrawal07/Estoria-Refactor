@@ -1,6 +1,6 @@
 @tailwind base;
 @tailwind components;
-@tailwind utilities; 
+@tailwind utilities;
 
 @import url('https://fonts.googleapis.com/css2?family=El+Messiri:wght@400..700&family=Exo+2:ital,wght@0,100..900;1,100..900&family=Grandstander:ital,wght@0,100..900;1,100..900&family=Kalam:wght@300;400;700&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Orbitron:wght@400..900&family=Philosopher:ital,wght@0,400;0,700;1,400;1,700&family=Quicksand:wght@300..700&family=Titan+One&display=swap');
 
@@ -60,7 +60,7 @@ body {
     flex-direction: row;
 }
 
-.flex-row-reverse{
+.flex-row-reverse {
     flex-direction: row-reverse;
 }
 
@@ -74,7 +74,8 @@ body {
 
 .logo {
     height: 10rem;
-    width: 10rem;
+    /* width: 10rem; */
+    aspect-ratio: 1/1;
     margin-bottom: 1rem;
     border-radius: 50%;
     overflow: hidden;
@@ -87,8 +88,9 @@ body {
 }
 
 .logo img {
-    height: 18rem;
+    /* height: 18rem; */
     width: 18rem;
+    aspect-ratio: 1/1;
 }
 
 .heading {
@@ -176,13 +178,13 @@ body {
     height: 80%;
 }
 
-.right2{
+.right2 {
     width: 100%;
     height: 100%;
 
 }
 
-.left2{
+.left2 {
     width: 100%;
     height: 30%;
 
@@ -190,7 +192,7 @@ body {
 
 .sub-container {
     width: 80%;
-    height: 500px!;
+    /* height: 500px !; */
     min-height: 500px;
     backdrop-filter: blur(15px) saturate(200%);
     -webkit-backdrop-filter: blur(15px) saturate(200%);
@@ -206,14 +208,14 @@ body {
 .sub-left,
 .sub-right {
     width: 50%;
-    height: 100%;
+    /* height: 100%; */
     margin: 20px;
     /* padding: 20px; */
 }
 
 .bg-1 {
     position: absolute;
-    height: max(100vh,100%);
+    height: max(100vh, 100%);
     width: 100vw;
     background: conic-gradient(at 62.5% 12.5%, #00ddff 25%, #0000 0) calc(32px / -8) calc(32px / 2),
         conic-gradient(at 62.5% 12.5%, #00ddff 25%, #0000 0) calc(-3 * 32px / 8) calc(32px / 4),
@@ -226,15 +228,18 @@ body {
 }
 
 .gallery {
-    --g: 6px; /* the gap */
+    --g: 6px;
+    /* the gap */
 
     display: grid;
-    width: 100%; /* the size */
+    width: 100%;
+    /* the size */
     height: 100%;
     aspect-ratio: 1;
     grid: auto-flow 1fr / repeat(3, 1fr);
     gap: var(--g);
 }
+
 .gallery img {
     width: 100%;
     height: 100%;
@@ -243,13 +248,16 @@ body {
     cursor: pointer;
     transition: 0.5s;
 }
+
 .gallery img:hover {
     filter: grayscale(0);
 }
+
 .gallery img:nth-child(2) {
     grid-area: 1/2 / span 2 / span 2;
     clip-path: polygon(0 0, 100% 0, 100% 100%, calc(50% + var(--g) / 4) 100%, 0 calc(50% - var(--g) / 4));
 }
+
 .gallery img:nth-child(3) {
     grid-area: 2/1 / span 2 / span 2;
     clip-path: polygon(0 0, calc(50% - var(--g) / 4) 0, 100% calc(50% + var(--g) / 4), 100% 100%, 0 100%);
@@ -277,40 +285,14 @@ body {
     font-family: "Vasca", sans-serif;
 }
 
-.lower{
+.lower {
     width: 100%;
 }
 
-iframe{
+iframe {
     border-radius: 10px;
-    height: 100%!;
+    /* height: 100% ; */
     width: 100%;
-}
-
-@media screen and (max-width: 768px) {
-    .container {
-        height: auto;
-        min-height: 100vh;
-    }
-    .sub-container {
-        display: flex;
-        padding: 0.75rem;
-        flex-direction: column;
-    }
-    .sub-left,
-    .sub-right {
-        padding: 10px;
-        width: 100%;
-        height: 45%;
-        padding: 2%;
-    }
-    .text {
-        font-family: "ubuntu";
-        font-size: 0.75rem;
-        color: #000;
-        text-align: center;
-        margin-bottom: 2rem;
-    }
 }
 
 .container-gallery {
@@ -320,7 +302,7 @@ iframe{
     width: 80%;
     height: 80%;
     min-height: 500px;
-    box-shadow: 0 30px 30px rgb(194, 196, 201);
+    box-shadow: 0 10px 30px rgba(255, 255, 255, 0.158);
     border-radius: 10px;
 }
 
@@ -355,21 +337,25 @@ iframe{
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%; /* Width of the shadow */
+    width: 100%;
+    /* Width of the shadow */
     height: 100%;
-    background-image: linear-gradient(90deg, rgba(2,2,2,0.891281512605042) 0%, rgba(10,10,10,0.7092086834733893) 11%, rgba(41,41,41,0.5887605042016807) 30%, rgba(41,41,41,0.4431022408963585) 44%);
-    z-index: 1; /* Put it above the item */
+    background-image: linear-gradient(90deg, rgba(2, 2, 2, 0.891281512605042) 0%, rgba(10, 10, 10, 0.7092086834733893) 11%, rgba(41, 41, 41, 0.5887605042016807) 30%, rgba(41, 41, 41, 0.4431022408963585) 44%);
+    z-index: 1;
+    /* Put it above the item */
 }
 
 
 .slide .item:nth-child(3) {
-    left: calc(88% );
+    left: calc(88%);
     z-index: 2;
 }
+
 .slide .item:nth-child(4) {
     left: calc(88% + 5%);
     z-index: 2;
 }
+
 .slide .item:nth-child(5) {
     left: calc(88% + 10%);
     z-index: 2;
@@ -443,6 +429,7 @@ iframe{
         filter: blur(0);
     }
 }
+
 .button {
     width: 100%;
     text-align: center;
@@ -472,32 +459,39 @@ iframe{
         width: 90%;
         height: 100%;
     }
+
     .slide .item {
         width: 100%;
         height: 100%;
     }
-    
+
     .content .name {
         font-size: 30px;
     }
+
     .content .des {
         font-size: 15px;
     }
+
     .content button {
         padding: 5px 10px;
     }
+
     .button {
         bottom: 10px;
     }
+
     .item .content {
         width: 80%;
         left: 10px;
         /* text-align: center; */
     }
+
     .container-gallery .slide .item {
         width: 100px;
         height: 150px;
     }
+
     .slide .item:nth-child(1),
     .slide .item:nth-child(2) {
         top: 0;

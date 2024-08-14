@@ -1,6 +1,7 @@
 import "./global.css";
 
 export default function UpcomingEvent() {
+
   return (
     <div className="card">
       <h2 className="event">Event_Name</h2>
