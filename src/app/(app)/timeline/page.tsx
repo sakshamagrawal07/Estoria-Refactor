@@ -9,8 +9,8 @@ export default function Timeline() {
                 href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&display=swap"
                 rel="stylesheet"
             />
-            <div className="container upcomping-event-box">
-                <div className="flex flex-row gap-2">
+            <div className="upcomping-event-box">
+                <div className="flex gap-2">
                     <div className="header-logo">
                         <img src="" alt="logo" />
                     </div>
