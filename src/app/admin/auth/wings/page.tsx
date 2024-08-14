@@ -3,20 +3,11 @@
 import React, { useEffect, useState } from "react";
 import { Tabs, Tab } from "@nextui-org/react";
 import "./globals.css"
-import NavBar from "../../navbar";
 import DataTable from "./table";
 import AddNewModal from "./modal";
-
-import { ClubWings } from "../../api/models/wings";
-import { table } from "console";
+import { differentWingTypes } from "@/lib/differentWingTypes";
 
 export default function App() {
-
-    const wingsType = [
-        "Cultural Wings",
-        "Non-Cultural Wings"
-    ]
-
     const [data, setData] = useState([])
 
     useEffect(() => {
@@ -28,16 +19,12 @@ export default function App() {
 
     return (
         <>
-            {/* <NavBar /> */}
             <div className="flex flex-wrap gap-4 navbar">
                 <Tabs key="primary" color="secondary" aria-label="Tabs colors" radius="full" defaultSelectedKey="home" className="tabs">
                     {
-                        wingsType.map((wingType) => {
-
-                            const tableData = data.filter((wing: ClubWings) => {
-                                return wing.wingType === wingType;
-                            })
-
+                        differentWingTypes.map((wingType) => {
+                            //@ts-ignore
+                            const tableData = data[wingType] || []
                             return (
                                 <Tab key={wingType} title={wingType} className="tabContent">
                                     <DataTable tableData={tableData} />
@@ -49,7 +36,6 @@ export default function App() {
                         <AddNewModal />
                     </Tab>
                 </Tabs>
-
             </div>
         </>
     );

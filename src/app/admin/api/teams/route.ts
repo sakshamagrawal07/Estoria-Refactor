@@ -1,25 +1,34 @@
 import { NextRequest, NextResponse } from 'next/server'
+import Teams from '../models/teams';
+import { ObjectId } from 'mongodb';
+import { ConnectDB } from '../route';
+import { differentTeams } from '@/lib/differentTeams';
+
+ConnectDB()
 
 export async function POST(req: NextRequest, res: NextResponse) {
     try {
         const request = await req.json();
-        const response: Response = await fetch("http://localhost:3000/admin/api?collection=teams", {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(request),
-        })
-
-        let returnResponse;
-        if (response.status == 200) returnResponse = "Success";
-        else returnResponse = "Error from server";
+        const data = {
+            "name": request.name,
+            "position": request.position,
+            "teams": request.teams,
+            "insta": request.insta,
+            "linkedin": request.linkedin,
+            "github": request.github,
+            "imageUrl": request.imageUrl
+        }
+        const res = await Teams.create(data)
         return NextResponse.json({
-            message: returnResponse,
+            message: "Success",
+        },{
+            status:200
         })
-    }catch(error){
+    } catch (error) {
         return NextResponse.json({
             message: "Error sending data to database",
+        },{
+            status:500
         })
     }
 }
@@ -27,19 +36,29 @@ export async function POST(req: NextRequest, res: NextResponse) {
 export async function GET(req: NextRequest, res: NextResponse) {
 
     try {
-        const response: Response = await fetch("http://localhost:3000/admin/api?collection=teams", {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            }
-        })
-        let returnResponse=(await response.json()).message;
+        const res = await Teams.find({})
+        const data = differentTeams.reduce((acc, key) => {
+            //@ts-ignore
+            acc[key] = [];
+            res.forEach(member => {
+                if (member.teams.includes(key)) {
+                    //@ts-ignore
+                    acc[key].push(member);
+                }
+            });
+    
+            return acc;
+        },{});
         return NextResponse.json({
-            message: returnResponse,
+            message: data,
+        },{
+            status:200
         })
-    }catch(error){
+    } catch (error) {
         return NextResponse.json({
             message: "Error getting data from database",
+        },{
+            status:500
         })
     }
 }
@@ -48,19 +67,19 @@ export async function DELETE(req: NextRequest, res: NextResponse) {
 
     try {
         const id = req.nextUrl.searchParams.get('_id');
-        const response: Response = await fetch(`http://localhost:3000/admin/api?collection=teams&_id=${id}`, {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json',
-            }
-        })
-        let returnResponse=(await response.json()).message;
+        const res = await Teams.deleteOne({
+            "_id": new ObjectId(id!.toString())
+          });
         return NextResponse.json({
-            message: returnResponse,
+            message: "Deleted",
+        },{
+            status:200
         })
-    }catch(error){
+    } catch (error) {
         return NextResponse.json({
             message: "Error deleting data from database",
+        },{
+            status:500
         })
     }
 }

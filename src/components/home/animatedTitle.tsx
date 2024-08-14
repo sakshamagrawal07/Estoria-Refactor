@@ -88,7 +88,7 @@ export default function AnimatedTitle() {
   return (
     <div className="container flex-col">
       <div className="logo">
-        {/* <img src="assets/Images/homepage/logo.jpg" id="logo" alt="logo" /> */}
+        <img src="../../../../../logo2.png" id="logo" alt="logo" />
       </div>
 
       <div className="heading"><span className="heading-text">EST</span>Ó<span className="heading-text">RIA</span></div>

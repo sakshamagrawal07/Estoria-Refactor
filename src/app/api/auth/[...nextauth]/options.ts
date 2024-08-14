@@ -10,7 +10,7 @@ export const authOptions: NextAuthOptions = {
                 password: { label: "Password", type: "password" }
             },
             async authorize(credentials: any): Promise<any> {
-                const isPasswordCorrect = credentials.password === 'estoria'
+                const isPasswordCorrect = credentials.password === process.env.ADMIN_PASSWORD
                 if (isPasswordCorrect) {
                     return {
                         id: "admin",

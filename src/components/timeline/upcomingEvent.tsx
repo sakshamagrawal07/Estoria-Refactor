@@ -2,7 +2,7 @@ import "./global.css"
 
 export default function UpcomingEvent() {
     return (
-        <div className="card" >
+        <div className="card">
             <h2 className="event">Event_Name</h2>
             <p className="date">DATE | 21/10/2022</p>
             <p className="description">
@@ -16,7 +16,6 @@ export default function UpcomingEvent() {
                     Register
                 </span>
             </button>
-
-        </div >
+        </div>
     )
 }

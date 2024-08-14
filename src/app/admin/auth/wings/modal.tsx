@@ -45,7 +45,7 @@ export default function AddNewModal() {
     }
 
     async function sendData(data: ClubWings) {
-        const res: Response = await fetch("./api/wings", {
+        const res: Response = await fetch("http://localhost:3000/admin/api/wings", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

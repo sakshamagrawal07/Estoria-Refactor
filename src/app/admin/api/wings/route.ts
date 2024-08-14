@@ -1,25 +1,30 @@
 import { NextRequest, NextResponse } from 'next/server'
+import Wings from '../models/wings';
+import { ObjectId } from 'mongodb';
+import { ConnectDB } from '../route';
+
+ConnectDB()
 
 export async function POST(req: NextRequest, res: NextResponse) {
 
     try {
         const request = await req.json();
-        const response: Response = await fetch("http://localhost:3000/admin/api?collection=wings", {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(request),
-        })
-        let returnResponse;
-        if (response.status == 200) returnResponse = "success";
-        else returnResponse = "Error from server";
+        const data = {
+            "name": request.name,
+            "wingType": request.wingType,
+            "description": request.description
+        }
+        const res = await Wings.create(data)
         return NextResponse.json({
-            message: returnResponse,
+            message: "Success",
+        }, {
+            status: 200
         })
-    }catch(error){
+    } catch (error) {
         return NextResponse.json({
             message: "Error sending data to database",
+        }, {
+            status: 500
         })
     }
 }
@@ -27,19 +32,30 @@ export async function POST(req: NextRequest, res: NextResponse) {
 export async function GET(req: NextRequest, res: NextResponse) {
 
     try {
-        const response: Response = await fetch("http://localhost:3000/admin/api?collection=wings", {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            }
-        })
-        let returnResponse=(await response.json()).message;
+        const res = await Wings.find({})
+        const wingType = ["Cultural Wings","Non-Cultural Wings"]
+        const data = wingType.reduce((acc, key) => {
+            //@ts-ignore
+            acc[key] = [];
+            res.forEach(wing => {
+                if (wing.wingType===key) {
+                    //@ts-ignore
+                    acc[key].push(wing);
+                }
+            });
+    
+            return acc;
+        },{});
         return NextResponse.json({
-            message: returnResponse,
+            message: data,
+        }, {
+            status: 200
         })
-    }catch(error){
+    } catch (error) {
         return NextResponse.json({
             message: "Error sending data to database",
+        }, {
+            status: 500
         })
     }
 }
@@ -49,20 +65,20 @@ export async function DELETE(req: NextRequest, res: NextResponse) {
 
     try {
         const id = req.nextUrl.searchParams.get('_id');
-        const response: Response = await fetch(`http://localhost:3000/admin/api?collection=wings&_id=${id}`, {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json',
-            }
-        })
-        let returnResponse=(await response.json()).message;
+        const res = await Wings.deleteOne({
+            "_id": new ObjectId(id!.toString())
+        });
         return NextResponse.json({
-            message: returnResponse,
+            message: "Deleted",
+        }, {
+            status: 200
         })
-    }catch(error){
+    } catch (error) {
         console.log(error)
         return NextResponse.json({
             message: "Error deleting data from database",
+        }, {
+            status: 500
         })
     }
 }

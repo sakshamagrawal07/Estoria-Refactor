@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { Providers } from "./providers";
 import NavBar from "@/components/customNavbar/navbar";
+import { Toaster } from "react-hot-toast";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,12 +20,13 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark text-foreground bg-background">
       <header>
-        {/* <meta> */}
+        <link rel="shortcut icon" href="../../../../../logo2.png" type="image/x-icon" />
       </header>
       <body className={`${inter.className} relative`}>
         <Providers>
           <NavBar/>
           {children}
+          <Toaster/>
         </Providers>
       </body>
     </html>

@@ -1,5 +1,5 @@
 export const differentTeams = [
-    "Club",
+    "Club Head",
     "Acting",
     "Poetry",
     "Cinematography",
@@ -8,6 +8,11 @@ export const differentTeams = [
     "External Affairs",
     "Design",
     "Social Media",
-    "Founders",
+    "Club Founders",
     "Developers"
 ];
+
+interface t{
+    Club:object[];
+    Acting:object[];
+}

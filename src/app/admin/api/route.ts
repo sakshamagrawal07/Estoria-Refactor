@@ -7,7 +7,7 @@ import Wings, { ClubWings } from './models/wings';
 import Home, { HomeInterface } from "./models/home";
 import { cloudinary } from "@/lib/cloudinary"
 
-const Connection = async () => {
+export const ConnectDB = async () => {
   const url = "mongodb://localhost:27017/estoria"
 
   try {
@@ -19,7 +19,7 @@ const Connection = async () => {
 
 }
 
-Connection();
+ConnectDB();
 
 
 export async function POST(req: NextRequest, res: NextResponse) {
