@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import Wings from '../models/wings';
 import { ObjectId } from 'mongodb';
-import { ConnectDB } from '../route';
+import { ConnectDB } from '@/lib/db';
 
 ConnectDB()
 

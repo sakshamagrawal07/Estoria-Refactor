@@ -1,7 +1,7 @@
 import { ObjectId } from 'mongodb';
 import { NextRequest, NextResponse } from 'next/server'
 import Home from '../models/home';
-import { ConnectDB } from '../route';
+import { ConnectDB } from '@/lib/db';
 
 ConnectDB()
 

@@ -2,8 +2,52 @@ import { Github, Instagram, Linkedin, Mail, Phone } from "lucide-react"
 import "./globals.css"
 import Slider from "./slider"
 import Link from "next/link";
+import { useEffect, useState } from "react";
+
+export interface HomeCard {
+    _id?: string;
+    description?: string;
+    imageUrls: string[];
+    cardType?: string;
+    image?: string;
+    title?: string;
+}
 
 export default function Card() {
+
+    const [data, setData] = useState([])
+
+    useEffect(() => {
+        fetch('../../admin/api/home')
+            .then(response => {
+                console.log("JSON RES", response);
+                return response.json();
+            })
+            .then(res => {
+                const fetchedData = res.message;
+                setData(fetchedData); // Assuming setData is a useState function
+
+                console.log("RES : ", fetchedData);
+            })
+            .catch(error => {
+                console.error("Error fetching data:", error);
+            });
+
+    }, []);
+
+    //@ts-ignore
+    const aboutUs: HomeCard[] = data?.filter((card) => card.cardType === "About Us")
+    //@ts-ignore
+    const events: HomeCard[] = data?.filter((card) => card.cardType === "Events")
+    //@ts-ignore
+    const ourTeam: HomeCard[] = data?.filter((card) => card.cardType === "Our Team")
+    //@ts-ignore
+    const slider: HomeCard[] = data?.filter((card) => card.cardType === "Slider")
+
+    useEffect(() => {
+        console.log("About us : ", aboutUs)
+    }, [aboutUs])
+
 
     const style1 = {
         background: "linear-gradient(180deg, #010101 0%, #292929 90%)"
@@ -33,26 +77,29 @@ export default function Card() {
                 <div className="right flex">
                     <div className="sub-container flex-row">
                         <div className="sub-left flex text">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Non ratione doloribus, mollitia dolorem aliquam eveniet labore in earum placeat laudantium quaerat,
-                            ad impedit, esse eius deserunt est numquam. Doloremque, illo? Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ab autem repellendus error
-                            quae. Corrupti tenetur totam magnam. Quo modi fugiat mollitia maxime sint amet alias ea veniam tempora sequi? Lorem ipsum dolor sit amet consectetur
-                            adipisicing elit. Non ratione doloribus, mollitia dolorem aliquam eveniet labore in earum placeat laudantium quaerat, ad impedit, esse eius deserunt est
-                            numquam. Doloremque, illo? Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ab autem repellendus error quae. Corrupti tenetur totam magnam.
-                            Quo modi fugiat mollitia maxime sint amet alias ea veniam tempora sequi?
+                            {aboutUs[0]?.description ? aboutUs[0].description : "Loding..."}
                         </div>
                         <div className="sub-right">
                             <div className="gallery">
-                                <img src="../../../../../logo1.jpg" alt="Estoria" />
-                                <img src="../../../../../logo1.jpg" alt="Estoria" />
-                                <img src="../../../../../logo1.jpg" alt="Estoria" />
-                                <img src="../../../../../logo1.jpg" alt="Estoria" />
+                                {
+                                    aboutUs[0]?.imageUrls ?
+                                        aboutUs[0]?.imageUrls?.map((img, index) => {
+                                            return (
+                                                <img src={img} alt="Estoria" key={index} loading="lazy" />
+                                            )
+                                        }) :
+                                        <>
+                                            <img src="../../../../../logo1.jpg" alt="Estoria" loading="lazy" />
+                                            <img src="../../../../../logo1.jpg" alt="Estoria" loading="lazy" />
+                                            <img src="../../../../../logo1.jpg" alt="Estoria" loading="lazy" />
+                                            <img src="../../../../../logo1.jpg" alt="Estoria" loading="lazy" />
+                                        </>
+                                }
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
-
             <div className="container" style={style2}>
                 <div className="bg-1"></div>
                 <div className="left">
@@ -63,26 +110,31 @@ export default function Card() {
                 <div className="right flex">
                     <div className="sub-container flex-row-reverse">
                         <div className="sub-left flex text">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Non ratione doloribus, mollitia dolorem aliquam eveniet labore in earum placeat laudantium quaerat,
-                            ad impedit, esse eius deserunt est numquam. Doloremque, illo? Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ab autem repellendus error
-                            quae. Corrupti tenetur totam magnam. Quo modi fugiat mollitia maxime sint amet alias ea veniam tempora sequi? Lorem ipsum dolor sit amet consectetur
-                            adipisicing elit. Non ratione doloribus, mollitia dolorem aliquam eveniet labore in earum placeat laudantium quaerat, ad impedit, esse eius deserunt est
-                            numquam. Doloremque, illo? Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ab autem repellendus error quae. Corrupti tenetur totam magnam.
-                            Quo modi fugiat mollitia maxime sint amet alias ea veniam tempora sequi?
+                            {events[0]?.description ? events[0].description : "Loding..."}
                         </div>
                         <div className="sub-right">
                             <div className="gallery">
-                                <img src="../../../../../logo1.jpg" alt="Estoria" />
-                                <img src="../../../../../logo1.jpg" alt="Estoria" />
-                                <img src="../../../../../logo1.jpg" alt="Estoria" />
-                                <img src="../../../../../logo1.jpg" alt="Estoria" />
+                                {
+                                    events[0]?.imageUrls ?
+                                        events[0]?.imageUrls?.map((img, index) => {
+                                            return (
+                                                <img src={img} alt="Estoria" key={index} loading="lazy" />
+                                            )
+                                        }) :
+                                        <>
+                                            <img src="../../../../../logo1.jpg" alt="Estoria" loading="lazy" />
+                                            <img src="../../../../../logo1.jpg" alt="Estoria" loading="lazy" />
+                                            <img src="../../../../../logo1.jpg" alt="Estoria" loading="lazy" />
+                                            <img src="../../../../../logo1.jpg" alt="Estoria" loading="lazy" />
+                                        </>
+                                }
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <Slider />
+            <Slider data={slider} />
 
             <div className="container" style={style3}>
                 <div className="bg-1"></div>
@@ -94,19 +146,24 @@ export default function Card() {
                 <div className="right flex">
                     <div className="sub-container flex-row">
                         <div className="sub-left flex text">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Non ratione doloribus, mollitia dolorem aliquam eveniet labore in earum placeat laudantium quaerat,
-                            ad impedit, esse eius deserunt est numquam. Doloremque, illo? Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ab autem repellendus error
-                            quae. Corrupti tenetur totam magnam. Quo modi fugiat mollitia maxime sint amet alias ea veniam tempora sequi? Lorem ipsum dolor sit amet consectetur
-                            adipisicing elit. Non ratione doloribus, mollitia dolorem aliquam eveniet labore in earum placeat laudantium quaerat, ad impedit, esse eius deserunt est
-                            numquam. Doloremque, illo? Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ab autem repellendus error quae. Corrupti tenetur totam magnam.
-                            Quo modi fugiat mollitia maxime sint amet alias ea veniam tempora sequi?
+                            {ourTeam[0]?.description ? ourTeam[0].description : "Loading..."}
                         </div>
                         <div className="sub-right">
                             <div className="gallery">
-                                <img src="../../../../../logo1.jpg" alt="Estoria" />
-                                <img src="../../../../../logo1.jpg" alt="Estoria" />
-                                <img src="../../../../../logo1.jpg" alt="Estoria" />
-                                <img src="../../../../../logo1.jpg" alt="Estoria" />
+                                {
+                                    ourTeam[0]?.imageUrls ?
+                                        ourTeam[0]?.imageUrls?.map((img, index) => {
+                                            return (
+                                                <img src={img} alt="Estoria" key={index} loading="lazy" />
+                                            )
+                                        }) :
+                                        <>
+                                            <img src="../../../../../logo1.jpg" alt="Estoria" loading="lazy" />
+                                            <img src="../../../../../logo1.jpg" alt="Estoria" loading="lazy" />
+                                            <img src="../../../../../logo1.jpg" alt="Estoria" loading="lazy" />
+                                            <img src="../../../../../logo1.jpg" alt="Estoria" loading="lazy" />
+                                        </>
+                                }
                             </div>
                         </div>
                     </div>

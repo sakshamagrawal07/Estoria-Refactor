@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import Teams from '../models/teams';
 import { ObjectId } from 'mongodb';
-import { ConnectDB } from '../route';
+import { ConnectDB } from '@/lib/db';
 import { differentTeams } from '@/lib/differentTeams';
 
 ConnectDB()

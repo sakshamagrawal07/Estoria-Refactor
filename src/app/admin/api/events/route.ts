@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import Events from '../models/events';
 import { ObjectId } from 'mongodb';
-import { ConnectDB } from '../route';
+import { ConnectDB } from '@/lib/db';
 import { differentEventTypes } from '@/lib/differentEventTypes';
 
 ConnectDB()

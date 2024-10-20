@@ -2,9 +2,10 @@
 
 import { useEffect, useRef } from "react"
 import "./globals.css"
-import { ArrowLeft, ArrowRight} from "lucide-react"
+import { ArrowLeft, ArrowRight } from "lucide-react"
+import { HomeCard } from "./card"
 
-export default function Slider() {
+export default function Slider({ data }: { data: HomeCard[] }) {
 
     const style1 = {
         backgroundImage: "linear-gradient(180deg, #0f1019 0%, #212125 90%)"
@@ -42,7 +43,7 @@ export default function Slider() {
             slideRef.current.appendChild(items[0]);
         }
     };
-    
+
     const handlePrev = () => {
         if (slideRef.current) {
             //@ts-ignore
@@ -53,6 +54,7 @@ export default function Slider() {
     };
 
     useEffect(() => {
+        console.log("Data : ", data)
         const interval = setInterval(() => {
             handleNext();
         }, 2500);
@@ -70,48 +72,21 @@ export default function Slider() {
             <div className="right2 flex">
                 <div className="container-gallery" style={style2}>
                     <div className="slide" ref={slideRef}>
-                        <div className="item" style={style3}>
-                            <div className="content">
-                                <div className="name">Switzerland</div>
-                                <div className="des">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ab, eum!</div>
-                                <button>See More</button>
-                            </div>
-                        </div>
-                        <div className="item" style={style4}>
-                            <div className="content">
-                                <div className="name">Finland</div>
-                                <div className="des">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ab, eum!</div>
-                                <button>See More</button>
-                            </div>
-                        </div>
-                        <div className="item" style={style5}>
-                            <div className="content">
-                                <div className="name">Iceland</div>
-                                <div className="des">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ab, eum!</div>
-                                <button>See More</button>
-                            </div>
-                        </div>
-                        <div className="item" style={style6}>
-                            <div className="content">
-                                <div className="name">Australia</div>
-                                <div className="des">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ab, eum!</div>
-                                <button>See More</button>
-                            </div>
-                        </div>
-                        <div className="item" style={style7}>
-                            <div className="content">
-                                <div className="name">Netherland</div>
-                                <div className="des">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ab, eum!</div>
-                                <button>See More</button>
-                            </div>
-                        </div>
-                        <div className="item" style={style8}>
-                            <div className="content">
-                                <div className="name">Ireland</div>
-                                <div className="des">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ab, eum!</div>
-                                <button>See More</button>
-                            </div>
-                        </div>
+                        {
+                            data.map((slider) => {
+                                return (
+                                    <div className="item" style={{
+                                        backgroundImage: `url(${slider.image})`
+                                    }}>
+                                        <div className="content">
+                                            <div className="name">{slider.title}</div>
+                                            <div className="des">{slider.description}</div>
+                                            <button>See More</button>
+                                        </div>
+                                    </div>
+                                )
+                            })
+                        }
                     </div>
                     <div className="button">
                         <button className="prev" onClick={handlePrev}><ArrowLeft color="black" size={22} /></button>

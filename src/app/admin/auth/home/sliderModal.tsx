@@ -117,7 +117,7 @@ export default function SliderModal() {
                                     onChange={(e: InputChangeInterface) => setDescription(e.target.value)}
                                 />
                                 <CldUploadWidget
-                                    uploadPreset="h7tbopug"
+                                    uploadPreset={`${process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET}`}
                                     onSuccess={(results, options) => {
                                         handleOnSuccess(results)
                                     }}

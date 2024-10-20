@@ -135,7 +135,7 @@ export default function CardsModal() {
                                     </RadioGroup>
                                 </div>
                                 <CldUploadWidget
-                                    uploadPreset="h7tbopug"
+                                    uploadPreset={`${process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET}`}
                                     onQueuesEnd={(results, options) => {
                                         handleOnQueuesEnd(results)
                                     }}

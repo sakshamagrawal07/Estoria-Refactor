@@ -8,7 +8,7 @@ import Home, { HomeInterface } from "./models/home";
 import { cloudinary } from "@/lib/cloudinary"
 
 export const ConnectDB = async () => {
-  const url = "mongodb://localhost:27017/estoria"
+  const url = process.env.MONGODB_URI as string
 
   try {
     await mongoose.connect(url)
@@ -151,7 +151,7 @@ export async function DELETE(req: NextRequest, res: NextResponse) {
     })
 
   } catch (error) {
-    console.log("Error : ",error)
+    console.log("Error : ", error)
     return NextResponse.json({
       message: "Error with params"
     }, {
