@@ -3,6 +3,7 @@ import "./globals.css"
 import Slider from "./slider"
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { aboutUs, events, ourTeam, slider } from "@/data/home";
 
 export interface HomeCard {
     _id?: string;
@@ -15,39 +16,41 @@ export interface HomeCard {
 
 export default function Card() {
 
-    const [data, setData] = useState([])
+    // const [data, setData] = useState([])
 
-    useEffect(() => {
-        fetch('../../admin/api/home')
-            .then(response => {
-                console.log("JSON RES", response);
-                return response.json();
-            })
-            .then(res => {
-                const fetchedData = res.message;
-                setData(fetchedData); // Assuming setData is a useState function
+    // useEffect(() => {
+    //     fetch('../../admin/api/home')
+    //         .then(response => {
+    //             console.log("JSON RES", response);
+    //             return response.json();
+    //         })
+    //         .then(res => {
+    //             const fetchedData = res.message;
+    //             setData(fetchedData); // Assuming setData is a useState function
 
-                console.log("RES : ", fetchedData);
-            })
-            .catch(error => {
-                console.error("Error fetching data:", error);
-            });
+    //             console.log("RES : ", fetchedData);
+    //         })
+    //         .catch(error => {
+    //             console.error("Error fetching data:", error);
+    //         });
 
-    }, []);
+    // }, []);
 
     //@ts-ignore
-    const aboutUs: HomeCard[] = data?.filter((card) => card.cardType === "About Us")
+    // const aboutUs: HomeCard[] = data?.filter((card) => card.cardType === "About Us")
     //@ts-ignore
-    const events: HomeCard[] = data?.filter((card) => card.cardType === "Events")
+    // const events: HomeCard[] = data?.filter((card) => card.cardType === "Events")
     //@ts-ignore
-    const ourTeam: HomeCard[] = data?.filter((card) => card.cardType === "Our Team")
-    //@ts-ignore
-    const slider: HomeCard[] = data?.filter((card) => card.cardType === "Slider")
+    // const ourTeam: HomeCard[] = data?.filter((card) => card.cardType === "Our Team")
+    // @ts-ignore
+    // const slider: HomeCard[] = data?.filter((card) => card.cardType === "Slider")
 
-    useEffect(() => {
-        console.log("About us : ", aboutUs)
-    }, [aboutUs])
+    // useEffect(() => {
+    //     console.log("About us : ", aboutUs)
+    // }, [aboutUs])
 
+
+    
 
     const style1 = {
         background: "linear-gradient(180deg, #010101 0%, #292929 90%)"

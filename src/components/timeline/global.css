@@ -443,7 +443,7 @@ body {
     box-shadow: 4px 13px 30px 1px rgba(33, 17, 17, 0.2);
     border-radius: 5px;
     z-index: 2;
-    background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbUBvTnNgUVo3j179M_XrUvz4JobQDTbvyBw&s");
+    /* background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbUBvTnNgUVo3j179M_XrUvz4JobQDTbvyBw&s"); */
     background-size: cover;
     background-position: center;
     filter: grayscale();
@@ -452,7 +452,6 @@ body {
 
 .photo:hover {
     filter: grayscale(0);
-    transform: scale(4);
 }
 
 

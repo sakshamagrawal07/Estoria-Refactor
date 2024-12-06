@@ -4,6 +4,7 @@ import { useRef, useState } from "react";
 import "./global.css";
 import { useInView } from "react-hook-inview";
 import { Modal, ModalBody, ModalContent, ModalHeader, useDisclosure } from "@nextui-org/react";
+import { pastEvents } from "@/data/pastEvents";
 
 export default function PastEvent() {
 
@@ -45,7 +46,7 @@ export default function PastEvent() {
           <span className="font-style">E</span>VENTS
         </h1>
         <ul>
-          {items.map((_, index) => {
+          {pastEvents.map((event, index) => {
             const [ref, inView] = useInView({ threshold: 0.5 });
             //@ts-ignore    
             refs.current[index] = ref;
@@ -53,18 +54,14 @@ export default function PastEvent() {
             return (
               <li key={index} ref={ref} className={inView ? "in-view" : ""}>
                 <div className="timeline-card">
-                  <time>11 JUN,1687</time>
+                  <time>{event.date}</time>
                   <div className="overflow-hidden">
                     <div className="content">
-                      <h1>content</h1>
-                      <p>
-                        Lorem ipsum dolor, sit amet consectetur adipisicing
-                        elit. Reiciendis iusto quae beatae nulla, ipsum, quas
-                        officiis, reprehenderit enim eos similie?
-                      </p>
+                      <h1>{event.shortTitle}</h1>
+                      <p>{event.shortDescription}</p>
                       <a className="btn btn-open" onClick={onOpen}>See more</a>
                     </div>
-                    <div className="photo"></div>
+                    <img className="photo" src={event.image}></img>
                   </div>
                 </div>
               </li>
