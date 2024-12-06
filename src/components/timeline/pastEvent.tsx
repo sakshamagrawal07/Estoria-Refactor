@@ -46,14 +46,14 @@ export default function PastEvent() {
           <span className="font-style">E</span>VENTS
         </h1>
         <ul>
-          {pastEvents.map((event, index) => eventCard(event, index, onOpen))}
+          {pastEvents.map((event, index) => EventCard(event, index, onOpen))}
         </ul>
       </section>
     </div>
   );
 }
 
-function eventCard(event: any, index: number, onOpen: any) {
+function EventCard(event: any, index: number, onOpen: any) {
   const [ref, inView] = useInView({ threshold: 0.5 });
   //@ts-ignore    
   refs.current[index] = ref;
