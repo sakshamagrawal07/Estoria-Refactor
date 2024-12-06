@@ -19,7 +19,7 @@ export const ConnectDB = async () => {
 
 }
 
-ConnectDB();
+// ConnectDB();
 
 
 export async function POST(req: NextRequest, res: NextResponse) {
