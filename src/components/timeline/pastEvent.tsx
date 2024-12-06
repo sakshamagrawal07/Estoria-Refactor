@@ -12,6 +12,29 @@ export default function PastEvent() {
   const refs = useRef([]);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
+
+  function EventCard(event: any, index: number, onOpen: any) {
+    const [ref, inView] = useInView({ threshold: 0.5 });
+    //@ts-ignore    
+    refs.current[index] = ref;
+
+    return (
+      <li key={index} ref={ref} className={inView ? "in-view" : ""}>
+        <div className="timeline-card">
+          <time>{event.date}</time>
+          <div className="overflow-hidden">
+            <div className="content">
+              <h1>{event.shortTitle}</h1>
+              <p>{event.shortDescription}</p>
+              <a className="btn btn-open" onClick={onOpen}>See more</a>
+            </div>
+            <img className="photo" src={event.image}></img>
+          </div>
+        </div>
+      </li>
+    );
+  }
+
   return (
     <div className="past-event-box">
       <section className="timeline">
@@ -53,24 +76,3 @@ export default function PastEvent() {
   );
 }
 
-function EventCard(event: any, index: number, onOpen: any) {
-  const [ref, inView] = useInView({ threshold: 0.5 });
-  //@ts-ignore    
-  refs.current[index] = ref;
-
-  return (
-    <li key={index} ref={ref} className={inView ? "in-view" : ""}>
-      <div className="timeline-card">
-        <time>{event.date}</time>
-        <div className="overflow-hidden">
-          <div className="content">
-            <h1>{event.shortTitle}</h1>
-            <p>{event.shortDescription}</p>
-            <a className="btn btn-open" onClick={onOpen}>See more</a>
-          </div>
-          <img className="photo" src={event.image}></img>
-        </div>
-      </div>
-    </li>
-  );
-}
