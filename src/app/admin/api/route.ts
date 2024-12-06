@@ -7,17 +7,17 @@ import Wings, { ClubWings } from './models/wings';
 import Home, { HomeInterface } from "./models/home";
 import { cloudinary } from "@/lib/cloudinary"
 
-export const ConnectDB = async () => {
-  const url = process.env.MONGODB_URI as string
+// export const ConnectDB = async () => {
+//   const url = process.env.MONGODB_URI as string
 
-  try {
-    await mongoose.connect(url)
-    console.log("Database Connected")
-  } catch (err) {
-    console.log("Error connecting to Estoria Database")
-  }
+//   try {
+//     await mongoose.connect(url)
+//     console.log("Database Connected")
+//   } catch (err) {
+//     console.log("Error connecting to Estoria Database")
+//   }
 
-}
+// }
 
 // ConnectDB();
 
