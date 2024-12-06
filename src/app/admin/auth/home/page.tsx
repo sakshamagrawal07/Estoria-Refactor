@@ -7,13 +7,13 @@ import "./globals.css"
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
-interface Home{
+interface Home {
     _id: string;
-    title ?: string;
-    cardType ?: string;
+    title?: string;
+    cardType?: string;
     description: string;
-    image ?: string;
-    imageUrls ?: string[];
+    image?: string;
+    imageUrls?: string[];
 }
 
 export default function App({ }) {
@@ -88,6 +88,7 @@ export default function App({ }) {
                                             card.imageUrls!.map((urls: string, index: number) => {
                                                 return (
                                                     <Link
+                                                        key={index}
                                                         isBlock
                                                         showAnchorIcon
                                                         isExternal

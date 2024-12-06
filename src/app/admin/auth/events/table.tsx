@@ -87,6 +87,7 @@ export default function DataTable({ tableData }: { tableData: object[] }) {
                                             event.galleryImageUrls!.map((urls: string, index: number) => {
                                                 return (
                                                     <Link
+                                                        key={index}
                                                         isBlock
                                                         showAnchorIcon
                                                         isExternal

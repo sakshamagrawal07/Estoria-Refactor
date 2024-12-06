@@ -5,12 +5,12 @@ import "./global.css";
 import { useInView } from "react-hook-inview";
 import { Modal, ModalBody, ModalContent, ModalHeader, useDisclosure } from "@nextui-org/react";
 import { pastEvents } from "@/data/pastEvents";
+const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
 export default function PastEvent() {
 
   const items = Array(10).fill(0);
   const refs = useRef([]);
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   return (
     <div className="past-event-box">
@@ -46,29 +46,31 @@ export default function PastEvent() {
           <span className="font-style">E</span>VENTS
         </h1>
         <ul>
-          {pastEvents.map((event, index) => {
-            const [ref, inView] = useInView({ threshold: 0.5 });
-            //@ts-ignore    
-            refs.current[index] = ref;
-
-            return (
-              <li key={index} ref={ref} className={inView ? "in-view" : ""}>
-                <div className="timeline-card">
-                  <time>{event.date}</time>
-                  <div className="overflow-hidden">
-                    <div className="content">
-                      <h1>{event.shortTitle}</h1>
-                      <p>{event.shortDescription}</p>
-                      <a className="btn btn-open" onClick={onOpen}>See more</a>
-                    </div>
-                    <img className="photo" src={event.image}></img>
-                  </div>
-                </div>
-              </li>
-            );
-          })}
+          {pastEvents.map((event, index) => eventCard(event,index))}
         </ul>
       </section>
     </div>
+  );
+}
+
+function eventCard(event:any, index:number) {
+  const [ref, inView] = useInView({ threshold: 0.5 });
+  //@ts-ignore    
+  refs.current[index] = ref;
+
+  return (
+    <li key={index} ref={ref} className={inView ? "in-view" : ""}>
+      <div className="timeline-card">
+        <time>{event.date}</time>
+        <div className="overflow-hidden">
+          <div className="content">
+            <h1>{event.shortTitle}</h1>
+            <p>{event.shortDescription}</p>
+            <a className="btn btn-open" onClick={onOpen}>See more</a>
+          </div>
+          <img className="photo" src={event.image}></img>
+        </div>
+      </div>
+    </li>
   );
 }

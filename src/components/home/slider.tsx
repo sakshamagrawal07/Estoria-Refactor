@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react"
 import "./globals.css"
-import { ArrowLeft, ArrowRight } from "lucide-react"
+import { ArrowLeft, ArrowRight, Indent } from "lucide-react"
 import { HomeCard } from "./card"
 
 export default function Slider({ data }: { data: HomeCard[] }) {
@@ -73,11 +73,15 @@ export default function Slider({ data }: { data: HomeCard[] }) {
                 <div className="container-gallery" style={style2}>
                     <div className="slide" ref={slideRef}>
                         {
-                            data.map((slider) => {
+                            data.map((slider, index) => {
                                 return (
-                                    <div className="item" style={{
-                                        backgroundImage: `url(${slider.image})`
-                                    }}>
+                                    <div
+                                        key={index}
+                                        className="item"
+                                        style={{
+                                            backgroundImage: `url(${slider.image})`
+                                        }}
+                                    >
                                         <div className="content">
                                             <div className="name">{slider.title}</div>
                                             <div className="des">{slider.description}</div>
