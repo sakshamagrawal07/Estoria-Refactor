@@ -5,6 +5,7 @@ import "./global.css";
 import { useInView } from "react-hook-inview";
 import { Modal, ModalBody, ModalContent, ModalHeader, useDisclosure } from "@nextui-org/react";
 import { pastEvents } from "@/data/pastEvents";
+import Footer from "../Footer/Footer"
 
 export default function PastEvent() {
 
@@ -19,7 +20,7 @@ export default function PastEvent() {
     refs.current[index] = ref;
 
     return (
-      <li key={index} ref={ref} className={inView ? "in-view" : ""}>
+      <li key={index} ref={ref} className={inView ? "in-view" : ""} >
         <div className="timeline-card">
           <time>{event.date}</time>
           <div className="overflow-hidden">
@@ -36,7 +37,7 @@ export default function PastEvent() {
   }
 
   return (
-    <div className="past-event-box">
+    <div className="past-event-box"  >
       <section className="timeline">
         <Modal
           isOpen={isOpen}
@@ -72,7 +73,9 @@ export default function PastEvent() {
           {pastEvents.map((event, index) => EventCard(event, index, onOpen))}
         </ul>
       </section>
+     <Footer></Footer>
     </div>
+    
   );
 }
 
