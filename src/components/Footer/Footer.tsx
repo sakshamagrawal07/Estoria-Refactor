@@ -1,5 +1,5 @@
 import { Github, Instagram, Linkedin, Mail, Phone } from "lucide-react"
-import "../home/globals.css"
+// import "../home/globals.css"
 import "./globals.css"
 
 import Link from "next/link";

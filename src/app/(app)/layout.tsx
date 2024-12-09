@@ -4,7 +4,7 @@ import "./globals.css";
 import { Providers } from "./providers";
 import NavBar from "@/components/customNavbar/navbar";
 import { Toaster } from "react-hot-toast";
-import Footer from "@/components/Footer/footer";
+import Footer from "@/components/Footer/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
