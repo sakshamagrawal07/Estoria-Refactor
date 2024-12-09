@@ -1,6 +1,6 @@
 import { Github, Instagram, Linkedin, Mail, Phone } from "lucide-react"
 import "../home/globals.css"
-import "./Footer.css"
+import "./globals.css"
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -61,11 +61,7 @@ export default function Footer() {
                     </ul>
                   <h2 className="text-4xl p-5 font-bold">  Find us At : </h2>
                   
-                  <iframe className="max-w-full rounded-3xl" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3726.064267689423!2d79.02379987471234!3d20.94993409048242!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bd4c0529518230f%3A0x45b76be0621cbb88!2sIndian%20Institute%20of%20Information%20Technology%2C%20Nagpur%20(IIITN)!5e0!3m2!1sen!2sin!4v1713753805056!5m2!1sen!2sin" width="600" height="450"  allowFullScreen={false} loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
-                            
-    
-    
-                
+                  <iframe className="max-w-full rounded-3xl" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3726.064267689423!2d79.02379987471234!3d20.94993409048242!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bd4c0529518230f%3A0x45b76be0621cbb88!2sIndian%20Institute%20of%20Information%20Technology%2C%20Nagpur%20(IIITN)!5e0!3m2!1sen!2sin!4v1713753805056!5m2!1sen!2sin" width="600" height="450"  allowFullScreen={false} loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>            
         </section>
       </footer>
     )

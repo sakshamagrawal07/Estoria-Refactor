@@ -5,7 +5,6 @@ import "./global.css";
 import { useInView } from "react-hook-inview";
 import { Modal, ModalBody, ModalContent, ModalHeader, useDisclosure } from "@nextui-org/react";
 import { pastEvents } from "@/data/pastEvents";
-import Footer from "../Footer/Footer"
 
 export default function PastEvent() {
 
@@ -77,7 +76,6 @@ export default function PastEvent() {
           {pastEvents.map((event, index) => EventCard(event, index, onOpen))}
         </ul>
       </section>
-     <Footer></Footer>
     </div>
     
   );

@@ -4,7 +4,6 @@ import Slider from "./slider"
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { aboutUs, events, ourTeam, slider } from "@/data/home";
-import Footer from "../Footer/Footer"
 
 export interface HomeCard {
     _id?: string;
@@ -174,8 +173,6 @@ export default function Card() {
                     </div>
                 </div>
             </div>
-
-            <Footer />
             
         </>
     )
