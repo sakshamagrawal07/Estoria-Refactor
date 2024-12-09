@@ -10,7 +10,15 @@ export default function PastEvent() {
 
   const items = Array(10).fill(0);
   const refs = useRef([]);
+  const [modalTitle,setModalTitle] = useState("");
+  const [modalContent,setModalContent] = useState("");
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
+
+  const openModal = (event:any)=>{
+    onOpen();
+    setModalTitle(event.detailedTitle);
+    setModalContent(event.detailedDescription);
+  } 
 
 
   function EventCard(event: any, index: number, onOpen: any) {
@@ -26,7 +34,7 @@ export default function PastEvent() {
             <div className="content">
               <h1>{event.shortTitle}</h1>
               <p>{event.shortDescription}</p>
-              <a className="btn btn-open" onClick={onOpen}>See more</a>
+              <a className="btn btn-open" onClick={()=>openModal(event)}>See more</a>
             </div>
             <img className="photo" src={event.image}></img>
           </div>
@@ -44,21 +52,17 @@ export default function PastEvent() {
           placement="center"
           scrollBehavior="inside"
           backdrop="blur"
-          // classNames={{
-          //   // body: "py-[50px]",
-          //   backdrop: "backdrop-opacity-50",
-          //   header: "border-b-[10px] border-[#292f46]"
-          // }}
+          classNames={{
+            // body: "py-[50px]",
+            backdrop: "backdrop-opacity-50",
+            header: "border-b-[10px] border-[#292f46]"
+          }}
           size="xl"
         >
           <ModalContent>
-            <ModalHeader className="flex flex-col gap-1">Modal Title</ModalHeader>
+            <ModalHeader className="flex flex-col gap-1">{modalTitle}</ModalHeader>
             <ModalBody>
-              <p className="mb-6">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Nullam pulvinar risus non risus hendrerit venenatis.
-                Pellentesque sit amet hendrerit risus, sed porttitor quam.
-              </p>
+              <p className="mb-6">{modalContent}</p>
             </ModalBody>
           </ModalContent>
         </Modal>
