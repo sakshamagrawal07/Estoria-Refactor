@@ -3,6 +3,7 @@ import "./globals.css"
 import Slider from "./slider"
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import Footer from "../Footer/Footer";
 import { aboutUs, events, ourTeam, slider } from "@/data/home";
 
 export interface HomeCard {
@@ -173,6 +174,9 @@ export default function Card() {
                     </div>
                 </div>
             </div>
+
+            
+            
             
         </>
     )
