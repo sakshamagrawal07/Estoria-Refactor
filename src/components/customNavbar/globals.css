@@ -1,99 +1,13 @@
-.hamburger {
-    position: absolute;
-    top: 0;
-    left: 0;
-    padding: 20px;
-    display: flex;
-    position: fixed;
-    cursor: pointer;
-    z-index: 100;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+header{
+    background : linear-gradient(0, #01010100 0%, #000a24 90%);
+     
 }
 
-.hamburger i {
-    font-size: 40px;
-    color: whitesmoke;
-}
-
-.navbar {
-    position: absolute;
-    height: 100vh;
-    min-width: 50px;
-    width: 5%;
-    left: 0;
-    position: fixed;
-    background: none;
-    z-index: 99;
-    padding-left: 10px;
-    transition: all 0.25s linear;
-    display: flex;
-    transform: translateX(-150%);
-}
-
-.navbar.open {
-    transform: translateX(0%);
-}
-
-.navbar.closed {
-    transform: translateX(-150%);
-}
-
-.navbar ul {
-    height: 100%;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    list-style: none;
-}
-
-.navbar li {
-    margin-block: 15px;
-    padding: 15px;
-    background-color: #cacaca;
-    border-radius: 50%;
-    aspect-ratio: 1/1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 5px 0 20px -3px #e9e9e9;
-    transition: 0.25s;
-    color: #1a1a1a;
-}
-
-.navbar li:hover {
-    background-color: #f9f9f9;
-    box-shadow: 2.5px 0 10px -3px #1a1a1a, 5px 0 20px -3px #e9e9e9;
-
-    a i {
-        color: #292929;
-    }
-
-    .tooltip {
-        visibility: visible;
-    }
-}
-
-.navbar ul li a {
-    text-decoration: none;
-
-    i {
-        color: #292929b5;
-        font-size: max(25px, 1em);
-    }
-}
-
-.navbar ul li .tooltip {
-    visibility: hidden;
-    width: 120px;
-    background-color: #fff;
-    color: #000;
-    text-align: center;
-    font-size: 15px;
-    font-weight: 550;
-    border-radius: 50px;
-    padding: 5px 0;
-    position: absolute;
-    z-index: 1;
-    margin-left: 200px;
+.underline{
+    text-decoration-line: underline;
+    text-underline-offset: 10px;
 }

@@ -27,6 +27,7 @@ export default function Card({ name, description }:CardProp) {
         {/* <h2>{prop.index}</h2> */}
         <h3 className="mb-10">{name}</h3>
         <p>
+          
           {description}
         </p>
       </div>
