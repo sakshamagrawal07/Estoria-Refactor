@@ -18,7 +18,7 @@
 body {
     font: normal 16px/1.5 "Titillium Web", sans-serif;
     overflow-x: hidden;
-    padding-bottom: 100px;
+    padding-bottom: 0px;
     background: #1c1e1e;
     background:
         conic-gradient(at 62.5% 12.5%, rgba(35, 38, 43, 0.64) 25%, #0000 0) calc(28px/-8) calc(28px/2),

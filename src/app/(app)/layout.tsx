@@ -26,29 +26,11 @@ export default function RootLayout({
    
       <body className={`${inter.className} relative`}>
         <Providers>
-          {/* <NavBar/>
+          <NavBar/>
           
-          <Toaster/> */}
+          <Toaster/>
 
-      <header className="bg-slate-900 text-white sticky top-0 z-10">
-              <section className=" mx-auto p-5 flex justify-between items-center px-20 py-5">
-                  <h1 className="text-4xl font-medium">
-                      <a href="/">Estoria</a>
-                  </h1>
-                  <div>
-                      <button id="mobile-open-button" className="text-3xl lg:hidden focus:outline-none">
-                          &#9776;
-                      </button>
-                      <nav className="hidden lg:block space-x-8 text-xl" aria-label="main">
-                          <a href="">Home</a>
-                            <a href="">Gallery</a>
-                            <a href="">Events</a>
-                            <a href="">Our team</a>
-                            <a href="">Our wings</a>
-                      </nav>
-                  </div>
-              </section>
-          </header>
+      
           {children}
           
         </Providers>
