@@ -35,18 +35,18 @@ export default function NavBar() {
                     justifyContent: "space-between",
                     minWidth:"100%",
                     
-              }} className="mx-auto p-10">  
+              }} className="mx-auto p-10 ">  
                     
-                  <h3 className="text-7xl font-medium flex samkaran">
+                  <h5 className="flex text-7xl font-medium  samkaran w-full lg:w-auto">
                       <a href="/" className="flex gap-10 items-center">
                       <img  className="w-20 h-20 " src="https://i.ibb.co/CMpS6Pr/logo2.png" alt="Estoria" />
                       <span>Estoria </span></a>
-                  </h3>
+                  </h5>
                   <div>
-                      <button id="mobile-open-button" className="text-3xl lg:hidden focus:outline-none" onClick={()=>setmenuOpen(!menuOpen)}>
+                      <button id="mobile-open-button " className="text-3xl lg:hidden focus:outline-none self-end " onClick={()=>setmenuOpen(!menuOpen)}>
                           { menuOpen?<>&#10006;</>:<>&#9776;</>}
                       </button>
-                      <nav className="hidden lg:flex space-x-8 text-2xl" aria-label="main">
+                      <nav className="hidden lg:flex space-x-8 text-2xl" aria-label="main" >
                             <ul className="flex gap-6 ">
                            
                             { links.map( (link, index)=><li key={index} className="hover:opacity-80 underline-offset-2"> <a href={link.path}  className={(isOpen(link.path))?"underline":" " } > {link.name}</a></li> 
