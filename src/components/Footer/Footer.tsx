@@ -15,7 +15,7 @@ export default function Footer() {
      }
 
     return (
-        <footer  className=" lg:flex lg:items-start items-start p-10 flex-col lg:flex-row text-white items-" >
+        <footer  className=" lg:flex lg:items-start items-start p-10 flex-col lg:flex-row text-white mt-0">
             <section className="lg:w-1/3 p-10 lg:p-5  flex  flex-col justify-center items-center gap-7 ">
             
                 

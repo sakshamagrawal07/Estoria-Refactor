@@ -14,6 +14,7 @@
 body {
     overflow-x: hidden;
     scroll-snap-type: mandatory;
+    /* width: 100vw; */
 }
 
 @font-face {

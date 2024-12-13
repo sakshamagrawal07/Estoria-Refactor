@@ -60,7 +60,7 @@ export default function PastEvent() {
           size="xl"
         >
           <ModalContent>
-            <ModalHeader className="flex flex-col gap-1">{modalTitle}</ModalHeader>
+            <ModalHeader className="flex flex-col gap-1 bg-transparent">{modalTitle}</ModalHeader>
             <ModalBody>
               <p className="mb-6">{modalContent}</p>
             </ModalBody>
