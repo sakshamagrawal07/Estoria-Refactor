@@ -84,7 +84,7 @@ body {
   display: none;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1024px) {
   .container {
     height: auto;
     min-height: 100vh;
@@ -93,7 +93,7 @@ body {
   .sub-container {
     display: flex;
     padding: 0.75rem;
-    flex-direction: column;
+    flex-direction: column-reverse;
   }
 
   .sub-left,
