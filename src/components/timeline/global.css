@@ -369,7 +369,8 @@ body {
 .timeline-card time {
     position: absolute;
     background: #f5af19;
-    width: 150px;
+    width: auto;
+    padding: 1rem;
     height: 30px;
     top: -15px;
     border-radius: 5px;
