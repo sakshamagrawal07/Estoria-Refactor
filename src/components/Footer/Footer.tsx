@@ -19,7 +19,7 @@ export default function Footer() {
             <section className="lg:w-1/3 p-10 lg:p-5  flex  flex-col justify-center items-center gap-7 ">
             
                 
-                <img  className="w-fit h-fit  p-5  max-h-64 justify-center align-middle items-center " src={"./logo2.png"} alt="Estoria" />
+                <img  className="w-fit h-fit  p-5  max-h-64 justify-center align-middle items-center " src={"/logo2.png"} alt="Estoria" />
                 <h2 className="text-center text-7xl samkaran">Estoria</h2>
                 <h2 className="p-l-20 p-r-20 text-center text-4xl">Dynamics of Stages and Screen</h2>
             

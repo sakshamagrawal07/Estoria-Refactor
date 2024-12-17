@@ -91,7 +91,7 @@ export const pastEvents: PastEvent[] = [
     },
 
     { 
-        shortTitle: "Vibhajan Ki Vibhiksha" ,
+        shortTitle: "Vibhajan Ki Vibhiksha" , 
         detailedTitle: "Partition Horror Remembrance Day Play",
         date: "14th August 2024" ,
         shortDescription: "The Hindi play, adapted from a script by Dr. Prakash Jha, depicted the emotional and physical trauma endured by millions during the partition of India in 1947. ",
