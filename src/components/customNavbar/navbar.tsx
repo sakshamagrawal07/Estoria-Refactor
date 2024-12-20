@@ -39,7 +39,7 @@ export default function NavBar() {
                     
                   <h5 className="flex text-5xl font-medium  samkaran w-full lg:w-auto text-wrap min-w-20">
                       <a href="/" className="flex gap-10 items-center">
-                      <img  className="w-20 h-20 " src="./logo2.png" alt="Estoria" />
+                      <img  className="w-20 h-20 " src="/logo2.png" alt="Estoria" />
                       <span>Estoria </span></a>
                   </h5>
                   <div>

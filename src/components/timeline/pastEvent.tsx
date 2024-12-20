@@ -29,7 +29,7 @@ export default function PastEvent() {
     return (
       <li key={index} ref={ref} className={inView ? "in-view" : ""} >
         <div className="timeline-card">
-          <time>{event.date}</time>
+          <time className="w-24">{event.date}</time>
           <div className="overflow-hidden">
             <div className="content">
               <h1>{event.shortTitle}</h1>
