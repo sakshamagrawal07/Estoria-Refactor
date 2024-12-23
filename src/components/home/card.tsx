@@ -72,7 +72,7 @@ export default function Card() {
 
     return (
         <>
-            <div className="container flex-col" style={style1}>
+            <div className="container" style={style1}>
                 <div className="bg-1"></div>
                 <div className="left">
                     <div className="flex flex-row gap-2">
