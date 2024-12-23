@@ -43,38 +43,42 @@ export default function Teams() {
             {
                 teams.map((team, index) => {
                     return (
-                        <section key={index}>
-                             <h1 className="w-full header">{team.name.substring(0, 1)}<span className=" samkaran">{team.name.substring(1)}</span> </h1>
-                            <div className="top-row flex">
-                                <Card 
-                                    name= {team.lead.name} 
-                                    position = {team.lead.position} 
-                                    imageUrl = {team.lead.imageUrl} 
-                                    insta = {team.lead.insta} 
-                                    linkedIn = {team.lead.linkedIn}
-                                    github = {team.lead.github} 
+                        <> 
+                           <div className="w-screen  h-[1px] bg-gradient-to-r from-transparent via-white to-transparent"/>
+          
+                            <section className="m-4" key={index}>
+                                <h1 className="w-full header">{team.name.substring(0, 1)}<span className=" samkaran">{team.name.substring(1)}</span> </h1>
+                                <div className="top-row flex">
+                                    <Card 
+                                        name= {team.lead.name} 
+                                        position = {team.lead.position} 
+                                        imageUrl = {team.lead.imageUrl} 
+                                        insta = {team.lead.insta} 
+                                        linkedIn = {team.lead.linkedIn}
+                                        github = {team.lead.github} 
 
-                                />
-                            </div>
-                            <div className="row">
-                                {(team.members).map(
-                                    (member, index) => {
-                                        return (
-                                            <Card key={index}  
-                                                name = {member.name}
-                                                position = {member.position}
-                                                imageUrl = {member.imageUrl}
-                                                insta = {member.insta}
-                                                linkedIn = {member.linkedIn}
-                                                github = {member.github}
+                                    />
+                                </div>
+                                <div className="row">
+                                    {(team.members).map(
+                                        (member, index) => {
+                                            return (
+                                                <Card key={index}  
+                                                    name = {member.name}
+                                                    position = {member.position}
+                                                    imageUrl = {member.imageUrl}
+                                                    insta = {member.insta}
+                                                    linkedIn = {member.linkedIn}
+                                                    github = {member.github}
 
 
-                                            />
-                                        )
-                                    }
-                                )}
-                            </div>
-                        </section>
+                                                />
+                                            )
+                                        }
+                                    )}
+                                </div>
+                            </section>
+                        </>
                             )
                     }
                 )
