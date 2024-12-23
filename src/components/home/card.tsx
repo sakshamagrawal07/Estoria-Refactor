@@ -90,7 +90,7 @@ export default function Card() {
                                     aboutUs[0]?.imageUrls ?
                                         aboutUs[0]?.imageUrls?.map((img, index) => {
                                             return (
-                                                <img src={img} alt="Estoria" key={index} loading="lazy" />
+                                                <img className="aspect-square" src={img} alt="Estoria" key={index} loading="lazy" />
                                             )
                                         }) :
                                         <>
@@ -123,7 +123,7 @@ export default function Card() {
                                     events[0]?.imageUrls ?
                                         events[0]?.imageUrls?.map((img, index) => {
                                             return (
-                                                <img src={img} alt="Estoria" key={index} loading="lazy" />
+                                                <img className="aspect-square" src={img} alt="Estoria" key={index} loading="lazy" />
                                             )
                                         }) :
                                         <>
@@ -159,7 +159,7 @@ export default function Card() {
                                     ourTeam[0]?.imageUrls ?
                                         ourTeam[0]?.imageUrls?.map((img, index) => {
                                             return (
-                                                <img src={img} alt="Estoria" key={index} loading="lazy" />
+                                                <img className="aspect-square" src={img} alt="Estoria" key={index} loading="lazy" />
                                             )
                                         }) :
                                         <>
