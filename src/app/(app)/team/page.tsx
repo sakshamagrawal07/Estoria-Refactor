@@ -8,7 +8,7 @@ import "./globals.css";
 export default function Teams() {
 
     const clubLead = data['clubLead'];
-    const clubCoLead = data['clubLead'];
+    const clubCoLead = data['clubCoLead'];
     const teams = data['teams']
     // console.$0.style = "width:100%;"
 

@@ -27,7 +27,7 @@ const clubLead : Member = {
 const clubCoLead : Member = {
     name : "Dhruv Mundad",
     position : "Club Co-Lead",
-    imageUrl  : "/images/Team/dhruv_mundad.jpeg",
+    imageUrl  : "/images/Team/dhruv_mundad.jpg",
     insta : "https://www.instagram.com/dhruv_25kt",
     linkedIn : "https://www.linkedin.com/in/dhruv-mundada-7b1a42259/",
     github : ""
