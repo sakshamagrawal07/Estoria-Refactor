@@ -4,8 +4,10 @@ import { useEffect, useRef } from "react"
 import "./globals.css"
 import { ArrowLeft, ArrowRight, Indent } from "lucide-react"
 import { HomeCard } from "./card"
+import Link from "next/link"
+import { pastEvents } from "@/data/pastEvents";
 
-export default function Slider({ data }: { data: HomeCard[] }) {
+export default function Slider() {
 
     const style1 = {
         backgroundImage: "linear-gradient(180deg, #0f1019 0%, #212125 90%)"
@@ -35,6 +37,9 @@ export default function Slider({ data }: { data: HomeCard[] }) {
     // const [index, setIndex] = useState(0);
     const slideRef = useRef(null);
 
+   const data = pastEvents.slice(0,5);
+
+    
     const handleNext = () => {
         if (slideRef.current) {
             //@ts-ignore
@@ -54,10 +59,10 @@ export default function Slider({ data }: { data: HomeCard[] }) {
     };
 
     useEffect(() => {
-        console.log("Data : ", data)
+        
         const interval = setInterval(() => {
             handleNext();
-        }, 2500);
+        }, 5000);
         return () => clearInterval(interval);
     }, []);
 
@@ -83,9 +88,9 @@ export default function Slider({ data }: { data: HomeCard[] }) {
                                         }}
                                     >
                                         <div className="content">
-                                            <div className="name">{slider.title}</div>
-                                            <div className="des">{slider.description}</div>
-                                            <button>See More</button>
+                                            <div className="name">{slider.shortTitle}</div>
+                                            <div className="des">{slider.detailedDescription}</div>
+                                            <button> <Link href="/gallery">See More</Link> </button>
                                         </div>
                                     </div>
                                 )

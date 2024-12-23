@@ -139,7 +139,7 @@ export default function Card() {
                 </div>
             </div>
 
-            <Slider data={slider} />
+            <Slider/>
 
             <div className="container" style={style3}>
                 <div className="bg-1"></div>
