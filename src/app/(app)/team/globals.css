@@ -1,3 +1,25 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities; 
+body > [data-overlay-container] {
+    width: 100%;
+}  
+
+@font-face {
+    font-family: "Samkaran";
+    src: url("../../../../public/samkaran.TTF") format("truetype");
+}
+
+@font-face {
+    font-family: "Bavalor";
+    src: url("../../../../public/Bavalor.ttf") format("truetype");
+}
+
+
+
+
+
+.samkaran {
+    font-family: "Samkaran";
+    color: #fff;
+}
+
+
+
